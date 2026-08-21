@@ -1,6 +1,6 @@
-# MLOps DevOps Runbook
+﻿# MLOps DevOps Runbook
 
-**Owner:** Iqbal <email not provided>  
+**Owner:** shamim.linkedin@gmail.com  
 **Date:** 2026-08-22
 
 ## Docs Index
@@ -11,7 +11,7 @@
 
 ## Domain Context
 
-This runbook covers a minimal end-to-end MLOps and DevSecOps demonstration on AWS, built for learning and CV evidence rather than production use. The active project deploys a lightweight scikit-learn model behind a FastAPI prediction API, packages it in Docker, stores the image in Amazon ECR, and runs it on a small CPU-only Amazon EKS worker node. Delivery uses separate CI and CD flows: CI tests, scans, builds, and pushes an image; CD updates a GitOps repository so Argo CD and Argo Rollouts can deploy, validate with Prometheus, promote, or roll back. Git repositories are the source of truth for source code and Kubernetes desired state, AWS Secrets Manager owns runtime/deployment secrets, and AWS IAM with OIDC owns pipeline authentication. Open questions: owner email, AWS account and region, CI/CD platform, exact security thresholds, DAST tool, Prometheus analysis thresholds, and the smallest acceptable EKS node shape.
+This runbook covers a minimal end-to-end MLOps and DevSecOps demonstration on AWS, built for learning and CV evidence rather than production use. The active project deploys a lightweight scikit-learn model behind a FastAPI prediction API, packages it in Docker, stores the image in Amazon ECR, and runs it on a small CPU-only Amazon EKS worker node. Delivery uses separate CI and CD flows: CI tests, scans, builds, and pushes an image; CD updates a GitOps repository so Argo CD and Argo Rollouts can deploy, validate with Prometheus, promote, or roll back. Git repositories are the source of truth for source code and Kubernetes desired state, AWS Secrets Manager owns runtime/deployment secrets, and AWS IAM with OIDC owns pipeline authentication. Open questions: AWS account and region, CI/CD platform, exact security thresholds, DAST tool, Prometheus analysis thresholds, and the smallest acceptable EKS node shape.
 
 ## Domain Rules
 
@@ -61,9 +61,9 @@ Four tiers. A path has exactly one owner.
 
 | Path | Owner |
 |---|---|
-| `AGENTS.md` | Iqbal <email not provided> |
-| `docs/projects-guide.md` | Iqbal <email not provided> |
-| `projects/2026-08-22_minimal-mlops-devsecops-pipeline/` | Iqbal <email not provided> |
+| `AGENTS.md` | shamim.linkedin@gmail.com |
+| `docs/projects-guide.md` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_minimal-mlops-devsecops-pipeline/` | shamim.linkedin@gmail.com |
 
 If you find another owner's docs stale or wrong, document the drift and tell the owner. Do not fix it yourself - they may know something the doc does not say, and a silent cross-area edit means neither of you can trust the file afterwards.
 
@@ -154,3 +154,4 @@ Concision means cutting words that carry nothing. It does not mean cutting the w
 |-- docs/          # Stable reference facts that outlive any one project
 `-- projects/      # One folder per piece of work: YYYY-MM-DD_project-name/
 ```
+

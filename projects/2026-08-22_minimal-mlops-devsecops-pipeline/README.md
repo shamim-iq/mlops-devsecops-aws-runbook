@@ -1,10 +1,10 @@
-# Minimal End-to-End MLOps and DevSecOps Pipeline on AWS
+﻿# Minimal End-to-End MLOps and DevSecOps Pipeline on AWS
 
 This project builds a small scikit-learn model-serving system to demonstrate the operational lifecycle of an ML application. It packages a FastAPI prediction API into Docker, publishes the image to Amazon ECR, deploys it to CPU-only Amazon EKS through GitOps, validates rollout health with Prometheus, and rolls back automatically when validation fails. The work is for learning and CV demonstration, so the architecture favors clarity, low cost, and cleanup over production-grade availability.
 
 ## Owner
 
-Iqbal <email not provided> - AWS account, region, and CI/CD platform not yet recorded.
+shamim.linkedin@gmail.com - AWS account, region, and CI/CD platform not yet recorded.
 
 ## Status
 
@@ -30,7 +30,7 @@ The EKS footprint stays CPU-only and temporary. EFK provides searchable Kubernet
 
 ## Next
 
-1. Confirm the owner email, AWS account, AWS region, CI/CD platform, and repository layout.
+1. Confirm the AWS account, AWS region, CI/CD platform, and repository layout.
 2. Choose the smallest EKS node shape and networking approach that can run EKS, Argo CD, Argo Rollouts, Prometheus, and minimal EFK inside the INR 500 cost objective.
 3. Create the source and GitOps repository structure.
 4. Build the FastAPI plus scikit-learn model service and local tests.
@@ -47,3 +47,4 @@ The EKS footprint stays CPU-only and temporary. EFK provides searchable Kubernet
 | File | What you'd learn there |
 |---|---|
 | [plan.md](./plan.md) | The one-day build order, gates, rollback proof, and cleanup sequence |
+

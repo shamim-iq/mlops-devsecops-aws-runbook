@@ -1,4 +1,4 @@
-# Minimal MLOps DevSecOps Pipeline Plan
+﻿# Minimal MLOps DevSecOps Pipeline Plan
 
 Verified 2026-08-22 from the supplied requirements.
 
@@ -8,7 +8,7 @@ This plan keeps CI and CD separate because the project is meant to demonstrate t
 
 | Gate | Must be true before moving on |
 |---|---|
-| Requirements gate | Owner email, AWS account, region, CI/CD platform, and repository layout are recorded. |
+| Requirements gate | AWS account, region, CI/CD platform, and repository layout are recorded. |
 | Cost gate | The selected EKS node shape and add-ons fit the INR 500 objective as closely as practical. |
 | Security gate | SAST, SCA, secrets scan, DAST, and Trivy thresholds are explicit. |
 | Approval gate | CD does not update GitOps manifests until manual approval is granted. |
@@ -39,7 +39,6 @@ This plan keeps CI and CD separate because the project is meant to demonstrate t
 
 | Question | Why it matters |
 |---|---|
-| What owner email should appear in the runbook? | Ownership rows should identify a real maintainer. |
 | Which AWS region and account will host the demo? | Cost, EKS instance types, and IAM setup depend on region/account. |
 | Which CI/CD platform will run CI and CD? | OIDC provider setup and approval gate syntax depend on the platform. |
 | Are source and GitOps separate repositories? | The CD update path and Argo CD source of truth depend on this. |
@@ -63,3 +62,4 @@ This plan keeps CI and CD separate because the project is meant to demonstrate t
 - [ ] Remove unnecessary security groups and networking resources.
 - [ ] Verify no unused AWS resources remain.
 - [ ] Check the AWS billing and cost dashboard.
+
