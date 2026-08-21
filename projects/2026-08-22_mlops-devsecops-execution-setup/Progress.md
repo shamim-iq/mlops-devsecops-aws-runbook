@@ -2,7 +2,7 @@
 
 ## Current State
 
-`active` - 2026-08-22. The setup project is scaffolded. Known AWS and repository facts are recorded, but deployment platform, Terraform state, and cost choices are still open.
+`active` - 2026-08-22. Execution setup decisions are recorded and the initial source scaffold exists in `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project`. No AWS resources have been deployed or changed.
 
 ## Done
 
@@ -15,22 +15,26 @@
 - [x] Record INR 500 as a cost-control objective, not a guaranteed billing ceiling.
 - [x] Record required add-ons: Argo CD, Argo Rollouts, Prometheus, and minimal EFK.
 - [x] Record required repository areas: FastAPI app, Docker build, tests, CI workflow, Terraform, and docs.
+- [x] Record CI/CD platform: GitHub Actions.
+- [x] Record GitOps repository approach: separate repository.
+- [x] Record Terraform state location: local state for demo.
+- [x] Record current `us-east-1` EKS control plane cost: USD 0.10 per cluster-hour.
+- [x] Record candidate EC2 worker node shape: one `t3.medium`.
+- [x] Record NAT Gateway choice: avoid NAT Gateway.
+- [x] Record EFK storage candidate: 8 GiB gp3.
+- [x] Record EFK retention: 1 day.
+- [x] Create `app/model/` in the main project directory.
+- [x] Create `tests/` in the main project directory.
+- [x] Create `terraform/` in the main project directory.
+- [x] Create `.github/workflows/` in the main project directory.
+- [x] Create `docs/` in the main project directory.
 
 ## Remaining
 
-- [ ] Record CI/CD platform.
-- [ ] Record GitOps repository.
-- [ ] Record Terraform state location.
-- [ ] Record backend bucket and lock table names if remote state is used.
-- [ ] Record current `us-east-1` EKS control plane cost.
-- [ ] Record candidate EC2 worker node shapes.
-- [ ] Record whether NAT gateway will be avoided for the demo.
-- [ ] Record EBS storage size for EFK.
-- [ ] Record EFK retention.
-- [ ] Pick the final node shape and add-on footprint.
-- [ ] Confirm whether GitHub Actions workflow files are needed.
-- [ ] Create `app/`.
-- [ ] Create `tests/`.
-- [ ] Create `terraform/`.
-- [ ] Create CI workflow folder after platform choice.
-- [ ] Record whether GitOps manifests live in a separate repository.
+- [ ] Create or confirm the separate GitOps repository.
+- [ ] Re-check the `t3.medium` candidate after Helm resource requests are defined.
+- [ ] Confirm whether local Terraform state remains acceptable before Terraform work starts.
+- [ ] Add the FastAPI service skeleton.
+- [ ] Add the first unit tests.
+- [ ] Add Terraform provider, variables, and backend files.
+- [ ] Add the first GitHub Actions workflow after app commands exist.

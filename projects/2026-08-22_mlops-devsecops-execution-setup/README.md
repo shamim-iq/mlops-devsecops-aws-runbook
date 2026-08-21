@@ -8,7 +8,7 @@ shamim.linkedin@gmail.com - AWS account `447182646004`, preferred region `us-eas
 
 ## Status
 
-`active` - 2026-08-22. AWS account, preferred region, source repository, and AWS profile boundaries are recorded. CI/CD platform, GitOps repository, Terraform state location, EKS node shape, and logging retention are not yet recorded.
+`active` - 2026-08-22. AWS account, preferred region, source repository, AWS profile boundaries, CI/CD platform, GitOps repository approach, Terraform state approach, EKS node candidate, NAT choice, and logging retention are recorded. The first source scaffold exists in `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project`.
 
 ## Setup Scope
 
@@ -21,23 +21,23 @@ This setup project covers the first three execution steps from [docs/plan.md](..
 | Codex AWS profile | `codex-read-only` |
 | Owner deployment profile | `shamim-mlops-deploy` |
 | Source repository | `https://github.com/shamim-iq/mlops-devsecops-aws-runbook.git` |
-| CI/CD platform | Not recorded |
-| GitOps repository | Not recorded |
-| Terraform state location | Not recorded |
-| EKS node shape | Not recorded |
-| Logging retention | Not recorded |
+| Main project directory | `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project` |
+| CI/CD platform | GitHub Actions |
+| GitOps repository | Separate repository: `https://github.com/shamim-iq/mlops-devsecops-aws-gitops.git` |
+| Terraform state location | Local state for the one-day demo |
+| EKS node shape | One CPU-only `t3.medium` worker candidate |
+| Logging retention | Minimal EFK retention: 1 day |
 
-> [CONFIRM] CI/CD platform, GitOps repository, Terraform state location, EKS node shape, current AWS pricing, and logging retention are not recorded yet.
+Cost check verified 2026-08-22 from AWS pricing pages for [EKS](https://aws.amazon.com/eks/pricing/), [EC2 T3](https://aws.amazon.com/ec2/instance-types/t3/), [VPC NAT Gateway](https://aws.amazon.com/vpc/pricing/), and [EBS](https://aws.amazon.com/ebs/pricing/). In `us-east-1`, standard-support EKS control plane pricing is USD 0.10 per cluster-hour. A 24-hour cluster run costs about USD 2.40 before worker nodes, storage, IPv4, data transfer, and logs. Using a recent USD/INR reference rate around 95.7 means the INR 500 objective is about USD 5.22, so the demo must keep the cluster short-lived. One `t3.medium` Linux worker is USD 0.0418 per hour. NAT Gateway is avoided because one NAT Gateway is USD 0.045 per hour plus USD 0.045 per GB processed. EBS `gp3` storage is USD 0.08 per GB-month, so EFK storage stays at 8 GiB with 1-day retention.
+
+> [CONFIRM] The separate GitOps repository URL is recorded as the intended repository name, but the repository has not been created or inspected yet.
 
 ## Next
 
-1. Record the CI/CD platform.
-2. Decide whether GitOps uses a separate repository.
-3. Choose local Terraform state or remote S3 plus DynamoDB state locking.
-4. Confirm current `us-east-1` EKS, EC2, EBS, NAT, and log storage costs.
-5. Select the smallest CPU-only EKS node shape that can run Argo CD, Argo Rollouts, Prometheus, minimal EFK, and the FastAPI service.
-6. Decide EFK storage and retention limits.
-7. Approve the source repository structure before creating application, test, CI, and Terraform folders.
+1. Create or confirm the separate GitOps repository.
+2. Add the FastAPI model-serving skeleton in the main project directory.
+3. Re-check the selected `t3.medium` footprint after Helm chart resource requests are defined.
+4. Keep all AWS apply, deploy, and delete commands owner-run with `shamim-mlops-deploy`.
 
 ## Files
 

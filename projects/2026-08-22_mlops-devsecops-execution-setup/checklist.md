@@ -8,12 +8,13 @@
 | AWS region | `us-east-1` |
 | Codex AWS profile | `codex-read-only` |
 | Owner deployment profile | `shamim-mlops-deploy` |
-| CI/CD platform | |
+| CI/CD platform | GitHub Actions |
 | Source repository | `https://github.com/shamim-iq/mlops-devsecops-aws-runbook.git` |
-| GitOps repository | |
-| Terraform backend type | |
-| Terraform state bucket | |
-| Terraform lock table | |
+| Main project directory | `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project` |
+| GitOps repository | Separate repository: `https://github.com/shamim-iq/mlops-devsecops-aws-gitops.git` |
+| Terraform backend type | Local state for demo |
+| Terraform state bucket | Not used |
+| Terraform lock table | Not used |
 
 ## Cost And Capacity
 
@@ -21,29 +22,29 @@
 |---|---|
 | GPU allowed | No |
 | Cost-control objective | INR 500 |
-| EKS control plane cost checked | |
-| Candidate worker node type | |
-| Worker node count | |
-| NAT gateway used | |
+| EKS control plane cost checked | Verified 2026-08-22: USD 0.10 per cluster-hour for standard support |
+| Candidate worker node type | `t3.medium` |
+| Worker node count | 1 |
+| NAT gateway used | No |
 | Argo CD included | Yes |
 | Argo Rollouts included | Yes |
 | Prometheus included | Yes |
 | EFK included | Yes, minimal |
-| EFK storage limit | |
-| EFK retention | |
+| EFK storage limit | 8 GiB gp3 candidate |
+| EFK retention | 1 day |
 
 ## Source Repository Structure
 
 | Area | Path | Status |
 |---|---|---|
-| FastAPI service | `app/` | Not created |
-| Model artifact home | `app/model/` | Not created |
-| Unit tests | `tests/` | Not created |
-| Docker build | `Dockerfile` | Not created |
-| Terraform | `terraform/` | Not created |
-| CI workflows | `.github/workflows/` | Waiting on CI/CD platform |
+| FastAPI service | `app/` | Created in main project directory |
+| Model artifact home | `app/model/` | Created in main project directory |
+| Unit tests | `tests/` | Created in main project directory |
+| Docker build | `Dockerfile` | Deferred to model API project |
+| Terraform | `terraform/` | Created in main project directory |
+| CI workflows | `.github/workflows/` | Created in main project directory |
 | Stable docs | `docs/` | Exists |
 | Project tracking | `projects/` | Exists |
-| GitOps manifests | Separate repository or folder | Not decided |
+| GitOps manifests | Separate repository | Repository not created |
 
-Do not proceed to Terraform planning or source scaffolding until the blank environment and cost fields are filled or explicitly deferred.
+Do not proceed to Terraform planning until source scaffolding exists and the owner confirms the local-state demo choice still fits.
