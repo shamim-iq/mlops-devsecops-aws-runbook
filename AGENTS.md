@@ -11,7 +11,22 @@
 
 ## Domain Context
 
-{{DOMAIN_CONTEXT}}
+This runbook covers a minimal end-to-end MLOps and DevSecOps demonstration on AWS, built for learning and CV evidence rather than production use. The active project deploys a lightweight scikit-learn model behind a FastAPI prediction API, packages it in Docker, stores the image in Amazon ECR, and runs it on a small CPU-only Amazon EKS worker node. Delivery uses separate CI and CD flows: CI tests, scans, builds, and pushes an image; CD updates a GitOps repository so Argo CD and Argo Rollouts can deploy, validate with Prometheus, promote, or roll back. Git repositories are the source of truth for source code and Kubernetes desired state, AWS Secrets Manager owns runtime/deployment secrets, and AWS IAM with OIDC owns pipeline authentication. Open questions: owner email, AWS account and region, CI/CD platform, exact security thresholds, DAST tool, Prometheus analysis thresholds, and the smallest acceptable EKS node shape.
+
+## Domain Rules
+
+- Do not use GPU instances for this project.
+- Keep the implementation small enough to complete in one day.
+- Treat INR 500 as a cost-control objective, not a guaranteed invoice ceiling.
+- Do not store long-lived AWS access keys in source, pipeline YAML, or local committed files.
+- Use OIDC to assume AWS IAM roles from the CI/CD platform.
+- Store required credentials in AWS Secrets Manager and retrieve them only when needed.
+- Keep CI and CD as separate logical pipelines.
+- Gate production deployment with manual approval before the GitOps update.
+- Fail the pipeline when configured security thresholds are exceeded.
+- Use Argo Rollouts for canary release, Prometheus validation, promotion, and automatic rollback.
+- Deploy EFK with Helm and keep retention/data volume minimal.
+- Cleanup is mandatory: remove EKS workloads, cluster, node resources, ECR images, S3 artifacts if created, secrets, IAM resources, and leftover networking/security groups after the demonstration.
 
 ## Codex Setup
 
@@ -48,6 +63,7 @@ Four tiers. A path has exactly one owner.
 |---|---|
 | `AGENTS.md` | Iqbal <email not provided> |
 | `docs/projects-guide.md` | Iqbal <email not provided> |
+| `projects/2026-08-22_minimal-mlops-devsecops-pipeline/` | Iqbal <email not provided> |
 
 If you find another owner's docs stale or wrong, document the drift and tell the owner. Do not fix it yourself - they may know something the doc does not say, and a silent cross-area edit means neither of you can trust the file afterwards.
 
