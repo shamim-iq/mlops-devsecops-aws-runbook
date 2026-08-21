@@ -4,10 +4,10 @@
 
 | Field | Value |
 |---|---|
-| Dataset | |
-| Model type | Deterministic baseline until `model.pkl` exists |
+| Dataset | Built-in scikit-learn Iris dataset |
+| Model type | Logistic Regression |
 | Artifact path | `app/model/model.pkl` |
-| Training script path | |
+| Training script path | `scripts/train_model.py` candidate |
 | CPU-only compatible | Yes |
 
 ## API
@@ -15,7 +15,7 @@
 | Endpoint | Purpose | Status |
 |---|---|---|
 | `GET /health` | Health check for runtime and rollout probes | Created |
-| `POST /predict` | Prediction request and response | Created with baseline logic |
+| `POST /predict` | Prediction request and response | Created with `model.pkl` loading |
 | `GET /metrics` | Prometheus scrape endpoint | Created |
 
 ## Quality
