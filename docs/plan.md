@@ -12,7 +12,7 @@ shamim.linkedin@gmail.com - AWS account `447182646004`, preferred region `us-eas
 
 ## Status
 
-`active` - 2026-08-22. Requirements captured, execution setup decisions recorded, and the first source scaffold exists in `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project`. No AWS resources, pipelines, application code, GitOps repository, or cluster workloads have been created.
+`active` - 2026-08-22. Requirements captured, execution setup decisions recorded, the GitOps repository exists, the initial GitOps structure is defined, and the first source scaffold exists in `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project`. No AWS resources, pipelines, application code, GitOps manifests, or cluster workloads have been created.
 
 ## How It Works
 
@@ -69,7 +69,7 @@ The EKS footprint stays CPU-only and temporary. The current candidate uses one `
 1. Record the AWS account, AWS region, CI/CD platform, source repository, GitOps repository, and Terraform state location. Done in execution setup.
 2. Confirm the EKS node shape, add-ons, and logging retention fit the INR 500 cost-control objective as closely as practical. Done for the initial candidate; re-check after Helm resource requests are defined.
 3. Create the source repository structure for the FastAPI service, Docker build, tests, CI workflow, Terraform, and project docs. Initial folders exist in `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project`.
-4. Create or confirm the separate GitOps repository structure for Kubernetes manifests, Argo Rollouts resources, Prometheus analysis templates, and Helm install notes.
+4. Push the separate GitOps repository structure for Kubernetes manifests, Argo Rollouts resources, Prometheus analysis templates, and Helm install notes.
 5. Build the lightweight scikit-learn model and store the trained artifact as `model.pkl`.
 6. Build the FastAPI prediction API with health and metrics endpoints.
 7. Add unit tests, linting, dependency checks, and local run commands for the application.
@@ -103,7 +103,6 @@ The EKS footprint stays CPU-only and temporary. The current candidate uses one `
 | Which Terraform resources are demo-owned versus pre-existing? | Cleanup must not destroy shared account resources. |
 | Which SAST, SCA, secrets scan, and DAST tools will be used? | Pipeline commands and failure thresholds depend on tool choice. |
 | Which Prometheus thresholds define rollback? | Argo Rollouts needs concrete success conditions. |
-| Is the intended GitOps repository created? | Argo CD needs a reachable repository before sync can be configured. |
 | Does one `t3.medium` still fit after Helm resource requests are set? | Add-on memory requests may force a larger node or reduced add-on footprint. |
 | Does local Terraform state remain acceptable before Terraform starts? | It is simple for the demo, but remote state is safer if collaboration starts. |
 

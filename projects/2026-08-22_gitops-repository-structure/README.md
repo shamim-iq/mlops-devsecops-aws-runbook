@@ -8,43 +8,49 @@ shamim.linkedin@gmail.com - AWS account `447182646004`, preferred region `us-eas
 
 ## Status
 
-`active` - 2026-08-22. The GitOps structure requirement is recorded. The GitOps repository location, repository name, and manifest layout are not yet finalized.
+`active` - 2026-08-22. The GitOps repository exists at `https://github.com/shamim-iq/mlops-devsecops-aws-gitops.git`. The initial layout, default branch, Argo CD source path, and first push steps are defined. No GitOps manifests have been committed yet.
 
 ## Repository Shape
 
 ```text
-<gitops-repo>/
+mlops-devsecops-aws-gitops/
+|-- README.md
 |-- apps/
 |   `-- prediction-api/
 |       |-- base/
+|       |   |-- namespace.yaml
+|       |   |-- service.yaml
+|       |   |-- rollout.yaml
+|       |   |-- analysis-template.yaml
+|       |   `-- kustomization.yaml
 |       `-- overlays/
 |           `-- prod/
-|-- rollouts/
-|   `-- prediction-api/
-|-- analysis/
-|   `-- prometheus/
+|               |-- kustomization.yaml
+|               `-- image-tag.yaml
 |-- platform/
 |   |-- argocd/
+|   |   `-- install-notes.md
 |   |-- argo-rollouts/
+|   |   `-- install-notes.md
 |   |-- prometheus/
+|   |   `-- install-notes.md
 |   `-- efk/
+|       `-- install-notes.md
 `-- docs/
     `-- install-notes.md
 ```
 
-The repository is the Kubernetes source of truth for Argo CD. CI builds and pushes images, but CD changes the image tag in this GitOps repository only after manual approval.
+The repository is the Kubernetes source of truth for Argo CD. The default branch is `main`. Argo CD should point at `apps/prediction-api/overlays/prod` for the production application source path. CI builds and pushes images, but CD changes the image tag in this GitOps repository only after manual approval.
 
-> [CONFIRM] GitOps repository URL, branch, environment layout, and final Helm chart choices are not recorded yet.
+Keep rollout and analysis resources inside the application base so the Argo CD application applies one Kustomize tree. Platform folders hold install notes and values choices for Argo CD, Argo Rollouts, Prometheus, and EFK until those add-ons are installed. Add real Helm values files only when the chart and resource requests are selected.
 
 ## Next
 
-1. Decide whether GitOps uses a separate repository or a folder in the source repository.
-2. Record the GitOps repository URL and default branch.
-3. Choose the environment layout: `prod` only or `dev` plus `prod`.
-4. Define the base Kubernetes manifests for the FastAPI prediction API.
-5. Define Argo Rollouts canary resources.
-6. Define Prometheus analysis templates for promotion and rollback.
-7. Record Helm install notes for Argo CD, Argo Rollouts, Prometheus, and minimal EFK.
+1. Push the empty GitOps folder structure.
+2. Define the base Kubernetes manifests for the FastAPI prediction API.
+3. Define Argo Rollouts canary behavior in `apps/prediction-api/base/rollout.yaml`.
+4. Define Prometheus analysis in `apps/prediction-api/base/analysis-template.yaml`.
+5. Record Helm install notes and resource requests for Argo CD, Argo Rollouts, Prometheus, and minimal EFK.
 
 ## Files
 

@@ -2,7 +2,7 @@
 
 ## Current State
 
-`active` - 2026-08-22. Execution setup decisions are recorded and the initial source scaffold exists in `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project`. No AWS resources have been deployed or changed.
+`active` - 2026-08-22. Execution setup decisions are recorded, the GitOps repository exists, and the initial source scaffold exists in `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project`. No AWS resources have been deployed or changed.
 
 ## Done
 
@@ -23,6 +23,8 @@
 - [x] Record NAT Gateway choice: avoid NAT Gateway.
 - [x] Record EFK storage candidate: 8 GiB gp3.
 - [x] Record EFK retention: 1 day.
+- [x] Confirm GitOps repository exists: `https://github.com/shamim-iq/mlops-devsecops-aws-gitops.git`.
+- [x] Define the initial GitOps repository structure.
 - [x] Create `app/model/` in the main project directory.
 - [x] Create `tests/` in the main project directory.
 - [x] Create `terraform/` in the main project directory.
@@ -31,7 +33,7 @@
 
 ## Remaining
 
-- [ ] Create or confirm the separate GitOps repository.
+- [ ] Push the initial GitOps repository structure.
 - [ ] Re-check the `t3.medium` candidate after Helm resource requests are defined.
 - [ ] Confirm whether local Terraform state remains acceptable before Terraform work starts.
 - [ ] Add the FastAPI service skeleton.

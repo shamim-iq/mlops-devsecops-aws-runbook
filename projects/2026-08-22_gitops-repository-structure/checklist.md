@@ -4,24 +4,24 @@
 
 | Field | Value |
 |---|---|
-| GitOps repository URL | |
-| Default branch | |
-| Repository model | Separate repository or source repository folder |
-| Argo CD source path | |
-| Environment layout | |
+| GitOps repository URL | `https://github.com/shamim-iq/mlops-devsecops-aws-gitops.git` |
+| Default branch | `main` |
+| Repository model | Separate repository |
+| Argo CD source path | `apps/prediction-api/overlays/prod` |
+| Environment layout | `prod` only for the demo |
 
 ## Required Structure
 
 | Area | Path | Status |
 |---|---|---|
-| Prediction API base manifests | `apps/prediction-api/base/` | Not created |
-| Production overlay | `apps/prediction-api/overlays/prod/` | Not created |
-| Argo Rollouts resources | `rollouts/prediction-api/` | Not created |
-| Prometheus analysis templates | `analysis/prometheus/` | Not created |
-| Argo CD install notes | `platform/argocd/` | Not created |
-| Argo Rollouts install notes | `platform/argo-rollouts/` | Not created |
-| Prometheus install notes | `platform/prometheus/` | Not created |
-| EFK install notes | `platform/efk/` | Not created |
-| General install notes | `docs/install-notes.md` | Not created |
+| Prediction API base manifests | `apps/prediction-api/base/` | Defined, not pushed |
+| Production overlay | `apps/prediction-api/overlays/prod/` | Defined, not pushed |
+| Argo Rollouts resources | `apps/prediction-api/base/rollout.yaml` | Defined, not pushed |
+| Prometheus analysis templates | `apps/prediction-api/base/analysis-template.yaml` | Defined, not pushed |
+| Argo CD install notes | `platform/argocd/install-notes.md` | Defined, not pushed |
+| Argo Rollouts install notes | `platform/argo-rollouts/install-notes.md` | Defined, not pushed |
+| Prometheus install notes | `platform/prometheus/install-notes.md` | Defined, not pushed |
+| EFK install notes | `platform/efk/install-notes.md` | Defined, not pushed |
+| General install notes | `docs/install-notes.md` | Defined, not pushed |
 
-Do not build the CD workflow until the GitOps repository URL, branch, and Argo CD source path are recorded.
+Do not build the CD workflow until the initial GitOps structure is pushed and the Argo CD source path exists on `main`.

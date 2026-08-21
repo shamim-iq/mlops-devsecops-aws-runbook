@@ -11,7 +11,7 @@
 | CI/CD platform | GitHub Actions |
 | Source repository | `https://github.com/shamim-iq/mlops-devsecops-aws-runbook.git` |
 | Main project directory | `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project` |
-| GitOps repository | Separate repository: `https://github.com/shamim-iq/mlops-devsecops-aws-gitops.git` |
+| GitOps repository | Created separate repository: `https://github.com/shamim-iq/mlops-devsecops-aws-gitops.git` |
 | Terraform backend type | Local state for demo |
 | Terraform state bucket | Not used |
 | Terraform lock table | Not used |
@@ -45,6 +45,6 @@
 | CI workflows | `.github/workflows/` | Created in main project directory |
 | Stable docs | `docs/` | Exists |
 | Project tracking | `projects/` | Exists |
-| GitOps manifests | Separate repository | Repository not created |
+| GitOps manifests | Separate repository | Structure defined, not pushed |
 
 Do not proceed to Terraform planning until source scaffolding exists and the owner confirms the local-state demo choice still fits.
