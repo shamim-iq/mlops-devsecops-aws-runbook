@@ -40,7 +40,7 @@ than at DNS.
 
 ## Owner
 
-owner@example.com - Epic PROJ-318 (due 2026-10-31)
+Project owner - Epic PROJ-318 (due 2026-10-31)
 
 ## Status
 

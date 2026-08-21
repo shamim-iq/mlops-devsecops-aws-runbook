@@ -1,29 +1,30 @@
 # MLOps DevSecOps Execution Setup
 
-This project prepares the execution inputs for the minimal MLOps DevSecOps pipeline before implementation starts. It records the AWS and repository facts, checks the EKS cost and capacity choices, and defines the source repository structure for the FastAPI service, Docker build, tests, CI workflow, Terraform, and docs.
+This project prepares the execution inputs for the minimal MLOps DevSecOps pipeline before implementation starts. It records the AWS and repository facts, checks the EKS cost and capacity choices, and defines the single implementation repository structure for the FastAPI service, Docker build, tests, CI workflow, Terraform, Kubernetes desired state, and docs.
 
 ## Owner
 
-shamim.linkedin@gmail.com - AWS account `447182646004`, preferred region `us-east-1`.
+Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 
-`active` - 2026-08-22. AWS account, preferred region, source repository, AWS profile boundaries, CI/CD platform, GitOps repository, Terraform state approach, EKS node candidate, NAT choice, and logging retention are recorded. The first source scaffold exists in `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project`.
+`active` - 2026-08-22. AWS account, preferred region, implementation repository, AWS profile boundaries, CI/CD platform, Terraform state approach, EKS node candidate, NAT choice, and logging retention are recorded. The initial implementation scaffold is pushed to `main` at commit `18518cf`.
 
 ## Setup Scope
 
-This setup project covers the first three execution steps from [docs/plan.md](../../docs/plan.md). It does not deploy AWS resources and does not create Git history. Codex remains limited to the `codex-read-only` AWS profile for inspection only.
+This setup project covers the first three execution steps from [docs/plan.md](../../docs/plan.md). It does not deploy AWS resources and does not create Git history. Codex remains limited to the `<read-only-aws-profile>` AWS profile for inspection only.
 
 | Area | Current state |
 |---|---|
-| AWS account | `447182646004` |
+| AWS account | Private, not committed |
 | AWS region | `us-east-1` |
-| Codex AWS profile | `codex-read-only` |
-| Owner deployment profile | `shamim-mlops-deploy` |
-| Source repository | `https://github.com/shamim-iq/mlops-devsecops-aws-runbook.git` |
-| Main project directory | `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project` |
+| Codex AWS profile | `<read-only-aws-profile>` |
+| Owner deployment profile | `<deployment-aws-profile>` |
+| Runbook repository | `<runbook-repository-url>` |
+| Implementation repository | `<implementation-repository-url>` |
+| Main project directory | `<local-implementation-repo>` |
 | CI/CD platform | GitHub Actions |
-| GitOps repository | Created separate repository: `https://github.com/shamim-iq/mlops-devsecops-aws-gitops.git` |
+| Repository model | Single repository for app, Terraform, CI, docs, and Kubernetes desired state |
 | Terraform state location | Local state for the one-day demo |
 | EKS node shape | One CPU-only `t3.medium` worker candidate |
 | Logging retention | Minimal EFK retention: 1 day |
@@ -32,10 +33,9 @@ Cost check verified 2026-08-22 from AWS pricing pages for [EKS](https://aws.amaz
 
 ## Next
 
-1. Push the initial GitOps repository structure.
-2. Add the FastAPI model-serving skeleton in the main project directory.
-3. Re-check the selected `t3.medium` footprint after Helm chart resource requests are defined.
-4. Keep all AWS apply, deploy, and delete commands owner-run with `shamim-mlops-deploy`.
+1. Add the FastAPI model-serving skeleton in the main project directory.
+2. Re-check the selected `t3.medium` footprint after Helm chart resource requests are defined.
+3. Keep all AWS apply, deploy, and delete commands owner-run with `<deployment-aws-profile>`.
 
 ## Files
 

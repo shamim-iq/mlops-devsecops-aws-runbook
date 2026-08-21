@@ -55,4 +55,4 @@
 | DynamoDB lock table handled | Not verified |
 | Billing dashboard checked | Not verified |
 
-Codex must not run destructive cleanup commands or use the `shamim-mlops-deploy` profile.
+Codex must not run destructive cleanup commands or use the `<deployment-aws-profile>` profile.

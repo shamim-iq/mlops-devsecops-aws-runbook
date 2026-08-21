@@ -4,7 +4,7 @@ This project defines the Argo CD bootstrap work for the demo EKS cluster. It cov
 
 ## Owner
 
-shamim.linkedin@gmail.com - AWS account `447182646004`, preferred region `us-east-1`.
+Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 

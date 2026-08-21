@@ -4,15 +4,15 @@ Verified 2026-08-22 from the supplied requirements and execution setup decisions
 
 This project builds a small scikit-learn model-serving system to demonstrate the operational lifecycle of an ML application. It packages a FastAPI prediction API into Docker, publishes the image to Amazon ECR, deploys it to CPU-only Amazon EKS through GitOps, validates rollout health with Prometheus, and rolls back automatically when validation fails. The work is for learning and CV demonstration, so the architecture favors clarity, low cost, and cleanup over production-grade availability.
 
-This plan keeps CI and CD separate because the project is meant to demonstrate the delivery lifecycle clearly during an interview. Terraform creates the AWS infrastructure so the demo can be repeated, reviewed, and destroyed from code. Cleanup remains a first-class phase because the infrastructure is temporary and cost-limited.
+This plan keeps CI and CD separate because the project is meant to demonstrate the delivery lifecycle clearly during an interview. The implementation repository `<implementation-repository-url>` holds the app, Terraform, CI, docs, and Kubernetes desired state together. Terraform creates the AWS infrastructure so the demo can be repeated, reviewed, and destroyed from code. Cleanup remains a first-class phase because the infrastructure is temporary and cost-limited.
 
 ## Owner
 
-shamim.linkedin@gmail.com - AWS account `447182646004`, preferred region `us-east-1`, CI/CD platform GitHub Actions.
+Project owner - AWS account kept private, preferred region `us-east-1`, CI/CD platform GitHub Actions.
 
 ## Status
 
-`active` - 2026-08-22. Requirements captured, execution setup decisions recorded, the GitOps repository exists, the initial GitOps structure is defined, and the first source scaffold exists in `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project`. No AWS resources, pipelines, application code, GitOps manifests, or cluster workloads have been created.
+`active` - 2026-08-22. Requirements captured, execution setup decisions recorded, the implementation repository exists, the initial single-repository structure is pushed to `main` at commit `18518cf`, and the first FastAPI skeleton passes local tests. No AWS resources, pipelines, trained model artifact, valid Kubernetes manifests, or cluster workloads have been created.
 
 ## How It Works
 
@@ -23,7 +23,7 @@ Source repo
   -> CI: tests, SAST, SCA, secrets scan, Docker build, Trivy
   -> Amazon ECR
   -> manual approval
-  -> GitOps repo image update
+  -> k8s image tag update
   -> Argo CD sync
   -> Argo Rollouts canary
   -> Prometheus analysis
@@ -68,11 +68,11 @@ The EKS footprint stays CPU-only and temporary. The current candidate uses one `
 
 1. Record the AWS account, AWS region, CI/CD platform, source repository, GitOps repository, and Terraform state location. Done in execution setup.
 2. Confirm the EKS node shape, add-ons, and logging retention fit the INR 500 cost-control objective as closely as practical. Done for the initial candidate; re-check after Helm resource requests are defined.
-3. Create the source repository structure for the FastAPI service, Docker build, tests, CI workflow, Terraform, and project docs. Initial folders exist in `C:\Users\iqbal\OneDrive\Desktop\Prep\MLOps-Project`.
-4. Push the separate GitOps repository structure for Kubernetes manifests, Argo Rollouts resources, Prometheus analysis templates, and Helm install notes.
+3. Create the single implementation repository structure for the FastAPI service, Docker build, tests, CI workflow, Terraform, Kubernetes desired state, and project docs. Initial folders exist in `<local-implementation-repo>`.
+4. Push the initial repository structure to `<implementation-repository-url>`. Done at commit `18518cf`.
 5. Build the lightweight scikit-learn model and store the trained artifact as `model.pkl`.
-6. Build the FastAPI prediction API with health and metrics endpoints.
-7. Add unit tests, linting, dependency checks, and local run commands for the application.
+6. Build the FastAPI prediction API with health and metrics endpoints. Initial baseline API exists locally.
+7. Add unit tests, linting, dependency checks, and local run commands for the application. First tests pass locally and run commands exist; linting and dependency checks remain.
 8. Containerize the API with Docker and verify the container runs locally.
 9. Create the Terraform layout with providers, variables, outputs, backend configuration, and environment-specific values.
 10. Define Terraform for demo-owned AWS infrastructure: networking, ECR, EKS, CPU-only node capacity, IAM roles, OIDC trust, Secrets Manager entries, and least-privilege policies.

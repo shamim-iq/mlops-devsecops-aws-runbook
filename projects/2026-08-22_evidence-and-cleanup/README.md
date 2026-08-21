@@ -4,7 +4,7 @@ This project defines the final proof and teardown work for the demo. It captures
 
 ## Owner
 
-shamim.linkedin@gmail.com - AWS account `447182646004`, preferred region `us-east-1`.
+Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 

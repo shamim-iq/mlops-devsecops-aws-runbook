@@ -4,11 +4,11 @@ This project builds the application artifact for the MLOps demo. It creates a li
 
 ## Owner
 
-shamim.linkedin@gmail.com - source repository `https://github.com/shamim-iq/mlops-devsecops-aws-runbook.git`.
+Project owner - implementation repository `<implementation-repository-url>`.
 
 ## Status
 
-`active` - 2026-08-22. The application build scope is recorded. No model artifact, FastAPI service, tests, linting setup, dependency checks, Dockerfile, or local container verification has been created yet.
+`active` - 2026-08-22. The initial FastAPI service, health endpoint, prediction endpoint, metrics endpoint, first tests, dependency file, Dockerfile, and local run commands are created in `<local-implementation-repo>`. Python 3.12.8 is installed, dependencies are installed in `.venv`, and `pytest` passes. The scikit-learn `model.pkl`, training step, linting, dependency check, and container verification are not created yet.
 
 ## Application Shape
 
@@ -18,30 +18,25 @@ shamim.linkedin@gmail.com - source repository `https://github.com/shamim-iq/mlop
 |   |-- main.py
 |   |-- model/
 |   |   `-- model.pkl
-|   `-- schemas.py
 |-- tests/
-|   |-- test_health.py
-|   `-- test_predict.py
+|   `-- test_health.py
 |-- requirements.txt
 |-- Dockerfile
 `-- README.md
 ```
 
-The API exposes health, prediction, and metrics endpoints. The model stays intentionally small so the demo remains CPU-only, fast to build, and easy to explain.
+The API exposes health, prediction, and metrics endpoints. The current prediction logic is a deterministic baseline so API, metrics, tests, and container work can start before the scikit-learn artifact exists. The model stays intentionally small so the demo remains CPU-only, fast to build, and easy to explain.
 
-> [CONFIRM] Dataset choice, model type, prediction schema, metric names, linting tool, dependency checker, and local run commands are not finalized yet.
+> [CONFIRM] Dataset choice, model type, linting tool, dependency checker, and final Prometheus metric thresholds are not finalized yet.
 
 ## Next
 
 1. Choose the small demonstration dataset and model type.
-2. Create the training script or artifact-generation step that writes `model.pkl`.
-3. Build the FastAPI app with health, prediction, and metrics endpoints.
-4. Add unit tests for health and prediction behavior.
-5. Add linting and dependency checks.
-6. Add documented local run commands.
-7. Create the Dockerfile.
-8. Build and run the container locally.
-9. Verify the health, prediction, and metrics endpoints from the running container.
+2. Create the training script or artifact-generation step that writes `app/model/model.pkl`.
+3. Replace the deterministic baseline with artifact-backed prediction.
+4. Add linting and dependency checks.
+5. Build and run the container locally.
+6. Verify the health, prediction, and metrics endpoints from the running container.
 
 ## Files
 

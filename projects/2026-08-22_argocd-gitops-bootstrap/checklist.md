@@ -4,7 +4,7 @@
 
 | Field | Value |
 |---|---|
-| AWS account ID | `447182646004` |
+| AWS account ID | Private, not committed |
 | AWS region | `us-east-1` |
 | EKS cluster name | |
 | Kubernetes context | Owner-managed |

@@ -4,7 +4,7 @@ This project defines the Terraform work package for the demo-owned AWS infrastru
 
 ## Owner
 
-shamim.linkedin@gmail.com - AWS account `447182646004`, preferred region `us-east-1`.
+Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 
@@ -12,7 +12,7 @@ shamim.linkedin@gmail.com - AWS account `447182646004`, preferred region `us-eas
 
 ## Operating Boundary
 
-Codex must not deploy, change, provision, or delete AWS resources. Codex may help design Terraform files and run local formatting or validation that does not contact or mutate AWS. The owner runs `terraform plan` and `terraform apply` with the `shamim-mlops-deploy` AWS profile after reviewing billable and permission-sensitive resources.
+Codex must not deploy, change, provision, or delete AWS resources. Codex may help design Terraform files and run local formatting or validation that does not contact or mutate AWS. The owner runs `terraform plan` and `terraform apply` with the `<deployment-aws-profile>` AWS profile after reviewing billable and permission-sensitive resources.
 
 ## Terraform Shape
 

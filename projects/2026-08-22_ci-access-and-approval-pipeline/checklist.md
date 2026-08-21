@@ -4,10 +4,10 @@
 
 | Field | Value |
 |---|---|
-| AWS account ID | `447182646004` |
+| AWS account ID | Private, not committed |
 | AWS region | `us-east-1` |
-| Codex AWS profile | `codex-read-only` |
-| Owner deployment profile | `shamim-mlops-deploy` |
+| Codex AWS profile | `<read-only-aws-profile>` |
+| Owner deployment profile | `<deployment-aws-profile>` |
 | CI/CD platform | |
 | Pipeline OIDC provider | |
 | Pipeline IAM role | |

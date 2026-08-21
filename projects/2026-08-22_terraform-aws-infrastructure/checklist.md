@@ -8,7 +8,7 @@
 | State bucket | |
 | Lock table | |
 | AWS region | `us-east-1` |
-| AWS account ID | `447182646004` |
+| AWS account ID | Private, not committed |
 
 ## Layout
 
@@ -49,4 +49,4 @@
 | Permission-sensitive review | Owner |
 | `terraform apply` | Owner only |
 
-Codex must not run `terraform apply`, use `shamim-mlops-deploy`, or make AWS resource changes.
+Codex must not run `terraform apply`, use `<deployment-aws-profile>`, or make AWS resource changes.

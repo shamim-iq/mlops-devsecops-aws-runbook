@@ -1,6 +1,6 @@
-﻿# MLOps DevOps Runbook
+# MLOps DevOps Runbook
 
-**Owner:** shamim.linkedin@gmail.com  
+**Owner:** Project owner  
 **Date:** 2026-08-22
 
 ## Docs Index
@@ -17,6 +17,7 @@ This runbook covers a minimal end-to-end MLOps and DevSecOps demonstration on AW
 
 - Do not use GPU instances for this project.
 - Keep the implementation small enough to complete in one day.
+- Keep all public project docs and repository files free of personal details, credentials, account identifiers, local machine paths, and secret-like values.
 - Treat INR 500 as a cost-control objective, not a guaranteed invoice ceiling.
 - Do not store long-lived AWS access keys in source, pipeline YAML, or local committed files.
 - Use OIDC to assume AWS IAM roles from the CI/CD platform.
@@ -35,7 +36,7 @@ Codex reads this file automatically from the repo root, which is why the convent
 Tool configuration is **not** in this repo. Codex config is per-user and global at `~/.codex/config.toml`, so each collaborator applies it on their own machine. Required for this repo:
 
 ```toml
-[projects.'c:\users\iqbal\onedrive\desktop\runbooks\runbook-mlops-devops']
+[projects.'<local-runbook-repo>']
 trust_level = "trusted"
 ```
 
@@ -51,9 +52,9 @@ Because config is per-user, nobody can configure the repo on anyone else's behal
 ## Codex Operating Limits
 
 - Codex must never deploy, change, provision, or delete resources in the AWS account.
-- Codex is limited to the `codex-read-only` AWS profile for AWS inspection only.
-- Codex must never use the `shamim-mlops-deploy` AWS profile.
-- The owner uses the `shamim-mlops-deploy` AWS profile for resource deployment.
+- Codex is limited to the `<read-only-aws-profile>` AWS profile for AWS inspection only.
+- Codex must never use the `<deployment-aws-profile>` AWS profile.
+- The owner uses the `<deployment-aws-profile>` AWS profile for resource deployment.
 - The owner is responsible for Git add, commit, push, and pull request work.
 - Codex must not run `git add`, `git commit`, `git push`, or create pull requests.
 
@@ -70,19 +71,19 @@ Four tiers. A path has exactly one owner.
 
 | Path | Owner |
 |---|---|
-| `AGENTS.md` | shamim.linkedin@gmail.com |
-| `docs/projects-guide.md` | shamim.linkedin@gmail.com |
-| `docs/plan.md` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_mlops-devsecops-execution-setup/` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_gitops-repository-structure/` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_model-api-container-build/` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_terraform-aws-infrastructure/` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_ci-access-and-approval-pipeline/` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_argocd-gitops-bootstrap/` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_rollouts-prometheus-analysis/` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_minimal-efk-logging/` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_cd-rollout-promotion-rollback/` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_evidence-and-cleanup/` | shamim.linkedin@gmail.com |
+| `AGENTS.md` | Project owner |
+| `docs/projects-guide.md` | Project owner |
+| `docs/plan.md` | Project owner |
+| `projects/2026-08-22_mlops-devsecops-execution-setup/` | Project owner |
+| `projects/2026-08-22_gitops-repository-structure/` | Project owner |
+| `projects/2026-08-22_model-api-container-build/` | Project owner |
+| `projects/2026-08-22_terraform-aws-infrastructure/` | Project owner |
+| `projects/2026-08-22_ci-access-and-approval-pipeline/` | Project owner |
+| `projects/2026-08-22_argocd-gitops-bootstrap/` | Project owner |
+| `projects/2026-08-22_rollouts-prometheus-analysis/` | Project owner |
+| `projects/2026-08-22_minimal-efk-logging/` | Project owner |
+| `projects/2026-08-22_cd-rollout-promotion-rollback/` | Project owner |
+| `projects/2026-08-22_evidence-and-cleanup/` | Project owner |
 
 If you find another owner's docs stale or wrong, document the drift and tell the owner. Do not fix it yourself - they may know something the doc does not say, and a silent cross-area edit means neither of you can trust the file afterwards.
 
@@ -95,7 +96,7 @@ Sections in this order. Drop any that has nothing to say.
 | Section | Contents |
 |---|---|
 | Title + lede | 2-4 sentences: what this changes and why it exists. Plain sentences. Enough that you don't reconstruct the problem from scratch. |
-| **Owner** | Email, plus whatever identifies the work - ticket, epic, account, region. One or two lines. |
+| **Owner** | Owner label, plus non-sensitive identifiers such as ticket, epic, or region. Keep emails, cloud account IDs, credentials, and local machine paths out of public docs. |
 | **Status** | `active` / `on-hold` / `complete` / `archived`, dated, then what's true now: done, in flight, blocked and on whom. Anything that would bite someone who acted without knowing it goes here. |
 | *The core* | The technical model you need in your head, as a paragraph or a small diagram. Name the heading for the genre: **How it works** for a build, **What was done** for finished work, **Root cause** for an incident, **What we found** for an audit. |
 | **Next** | The concrete next actions, in order. A complete project still has these. |
@@ -131,6 +132,12 @@ Concision means cutting words that carry nothing. It does not mean cutting the w
 - Flag uncertainty once, terse, as a blockquote: `> [CONFIRM] <what's unverified>`. Never inline, never repeated. Each flag lives in exactly one file - the topic's home.
 - `[CONFIRM]` marks an unverified fact. It does not mark an open question or an unfinished task - those go in **Next**.
 - Timestamp data that goes stale: `Verified YYYY-MM-DD`.
+
+**Public safety**
+- Never commit personal emails, personal names used as identifiers, local usernames, local absolute paths, cloud account IDs, profile names, access keys, tokens, passwords, private keys, or secret values.
+- Use placeholders for sensitive facts: `Project owner`, `Private, not committed`, `<implementation-repository-url>`, `<runbook-repository-url>`, `<local-implementation-repo>`, `<read-only-aws-profile>`, and `<deployment-aws-profile>`.
+- Keep credentials in the approved secret store or local uncommitted environment only. Public docs may say where a value belongs, but never include the value.
+- Before suggesting a commit or push, scan changed files for personal details and secret-like values.
 
 **Cut**
 - Lead with the fact. No throat-clearing, no outros, no "Background"/"Overview" sections, no "Related docs" footers - cross-link inline.

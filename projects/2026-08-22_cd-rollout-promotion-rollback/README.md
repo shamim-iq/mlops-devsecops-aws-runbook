@@ -4,7 +4,7 @@ This project defines the CD proof for the demo. It covers updating the GitOps im
 
 ## Owner
 
-shamim.linkedin@gmail.com - AWS account `447182646004`, preferred region `us-east-1`.
+Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 
