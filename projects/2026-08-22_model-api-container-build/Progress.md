@@ -2,7 +2,7 @@
 
 ## Current State
 
-`active` - 2026-08-22. The initial FastAPI app, endpoints, tests, dependency file, Dockerfile, and local commands are created in `<local-implementation-repo>`. Python 3.12.8 is installed, dependencies are installed in `.venv`, and `pytest` passes.
+`active` - 2026-08-22. The FastAPI app loads `app/model/model.pkl` for `/predict`. `scripts/train_model.py` trains Logistic Regression on the built-in scikit-learn Iris dataset and writes the artifact. Python 3.12.8 is installed, dependencies are installed in `.venv`, and `pytest` passes with 3 tests.
 
 ## Done
 
@@ -22,14 +22,16 @@
 - [x] Install Python 3.12.8 and create project `.venv`.
 - [x] Install Python dependencies.
 - [x] Run unit tests: 3 passed.
+- [x] Choose dataset: built-in scikit-learn Iris dataset.
+- [x] Choose final model type: Logistic Regression.
+- [x] Create model training script: `scripts/train_model.py`.
+- [x] Save trained artifact as `app/model/model.pkl`.
+- [x] Replace deterministic baseline with artifact-backed prediction.
+- [x] Add prediction response checks for artifact-backed output.
+- [x] Run unit tests after model integration: 3 passed.
 
 ## Remaining
 
-- [ ] Choose dataset.
-- [ ] Choose final model type.
-- [ ] Create model training or artifact-generation script.
-- [ ] Save trained artifact as `model.pkl`.
-- [ ] Replace deterministic baseline with artifact-backed prediction.
 - [ ] Add linting command.
 - [ ] Add dependency check command.
 - [ ] Build Docker image locally.
