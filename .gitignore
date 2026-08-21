@@ -1,0 +1,46 @@
+# Editor and workspace settings
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+
+# Local environment and secrets
+.env
+.env.*
+*.pem
+*.key
+*.crt
+*.kubeconfig
+kubeconfig*
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# AWS and generated artifacts
+awscliv2.zip
+AWSCLIV2.msi
+*.log
+local-aws-policies/
+
+# OS files
+.DS_Store
+Thumbs.db

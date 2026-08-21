@@ -48,6 +48,15 @@ multi_agent = true
 
 Because config is per-user, nobody can configure the repo on anyone else's behalf. New collaborators apply the block above themselves - it belongs in onboarding, not in a setup script.
 
+## Codex Operating Limits
+
+- Codex must never deploy, change, provision, or delete resources in the AWS account.
+- Codex is limited to the `codex-read-only` AWS profile for AWS inspection only.
+- Codex must never use the `shamim-mlops-deploy` AWS profile.
+- The owner uses the `shamim-mlops-deploy` AWS profile for resource deployment.
+- The owner is responsible for Git add, commit, push, and pull request work.
+- Codex must not run `git add`, `git commit`, `git push`, or create pull requests.
+
 ## Ownership
 
 Four tiers. A path has exactly one owner.
@@ -63,7 +72,17 @@ Four tiers. A path has exactly one owner.
 |---|---|
 | `AGENTS.md` | shamim.linkedin@gmail.com |
 | `docs/projects-guide.md` | shamim.linkedin@gmail.com |
-| `projects/2026-08-22_minimal-mlops-devsecops-pipeline/` | shamim.linkedin@gmail.com |
+| `docs/plan.md` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_mlops-devsecops-execution-setup/` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_gitops-repository-structure/` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_model-api-container-build/` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_terraform-aws-infrastructure/` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_ci-access-and-approval-pipeline/` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_argocd-gitops-bootstrap/` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_rollouts-prometheus-analysis/` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_minimal-efk-logging/` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_cd-rollout-promotion-rollback/` | shamim.linkedin@gmail.com |
+| `projects/2026-08-22_evidence-and-cleanup/` | shamim.linkedin@gmail.com |
 
 If you find another owner's docs stale or wrong, document the drift and tell the owner. Do not fix it yourself - they may know something the doc does not say, and a silent cross-area edit means neither of you can trust the file afterwards.
 
@@ -143,8 +162,8 @@ Concision means cutting words that carry nothing. It does not mean cutting the w
 ## Git
 
 - Branch before committing if you are on the default branch.
-- Commit or push only when asked.
-- Codex may run in a sandbox that blocks branch and push operations, and a detached HEAD cannot branch or push at all. When that happens, commit the work, then output the suggested branch name, commit message, and PR description for the user to apply through the App's own controls. Do not report the push as done.
+- Do not run `git add`, `git commit`, `git push`, or create pull requests. The owner handles staging, commits, pushes, and PRs.
+- When Git history work is needed, Codex may suggest a branch name, commit message, or PR description for the owner to apply.
 
 ## Structure
 
