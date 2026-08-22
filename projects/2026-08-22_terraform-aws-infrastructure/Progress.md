@@ -2,7 +2,7 @@
 
 ## Current State
 
-`active` - 2026-08-22. Terraform infrastructure work package is scaffolded. No Terraform files or AWS resources have been created.
+`active` - 2026-08-22. Terraform resources are implemented, applied by the owner, and verified with the read-only AWS profile. The deployed stack is in sync with Terraform: `terraform plan -var-file="envs/prod/demo.tfvars"` reports no changes. Implementation repository changes are not staged, committed, or pushed yet.
 
 ## Done
 
@@ -11,25 +11,32 @@
 - [x] Record CPU-only node requirement.
 - [x] Record `terraform fmt` and `terraform validate` gates.
 - [x] Record owner-only `terraform plan` review and `terraform apply` boundary.
+- [x] Choose local state for the initial demo scaffold.
+- [x] Create Terraform root files.
+- [x] Create `terraform/envs/prod/demo.tfvars.example`.
+- [x] Create module directories for networking, ECR, EKS, IAM, and secrets.
+- [x] Create module variable and output interfaces.
+- [x] Install Terraform locally: 1.15.8.
+- [x] Run `terraform fmt -recursive`.
+- [x] Run `terraform init -backend=false`.
+- [x] Run `terraform validate`: passed.
+- [x] Define networking resources.
+- [x] Define ECR resources.
+- [x] Define EKS resources with CPU-only worker capacity.
+- [x] Define IAM and OIDC resources.
+- [x] Define Secrets Manager resources.
+- [x] Configure Terraform to read the local AWS CLI profile from ignored `demo.tfvars`.
+- [x] Owner ran `terraform plan`.
+- [x] Owner reviewed billable resources.
+- [x] Owner reviewed permission-sensitive resources.
+- [x] Owner ran `terraform apply` after plan acceptance.
+- [x] Verify deployment with read-only AWS profile.
+- [x] Confirm final Terraform plan reports no changes.
 
 ## Remaining
 
-- [ ] Decide Terraform backend type.
-- [ ] Record state bucket name if remote state is used.
-- [ ] Record lock table name if remote state is used.
-- [ ] Create `terraform/backend.tf`.
-- [ ] Create `terraform/providers.tf`.
-- [ ] Create `terraform/variables.tf`.
-- [ ] Create `terraform/outputs.tf`.
-- [ ] Create `terraform/environments/demo.tfvars`.
-- [ ] Define networking module.
-- [ ] Define ECR module.
-- [ ] Define EKS module.
-- [ ] Define IAM and OIDC module.
-- [ ] Define Secrets Manager module.
-- [ ] Run `terraform fmt`.
-- [ ] Run `terraform validate`.
-- [ ] Owner runs `terraform plan`.
-- [ ] Owner reviews billable resources.
-- [ ] Owner reviews permission-sensitive resources.
-- [ ] Owner runs `terraform apply` after plan acceptance.
+- [ ] Owner reviews changed implementation files.
+- [ ] Owner stages, commits, and pushes implementation repository changes.
+- [ ] Owner updates the pull request with applied Terraform evidence.
+- [ ] Keep local-only files and concrete AWS account identifiers out of committed runbook files.
+- [ ] Clean up demo AWS resources when the demonstration is finished.
