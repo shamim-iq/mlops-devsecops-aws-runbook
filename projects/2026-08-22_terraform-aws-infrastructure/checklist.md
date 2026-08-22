@@ -4,9 +4,9 @@
 
 | Field | Value |
 |---|---|
-| Backend type | |
-| State bucket | |
-| Lock table | |
+| Backend type | Local state for initial demo scaffold |
+| State bucket | Not used |
+| Lock table | Not used |
 | AWS region | `us-east-1` |
 | AWS account ID | Private, not committed |
 
@@ -14,17 +14,18 @@
 
 | File or directory | Status |
 |---|---|
-| `terraform/backend.tf` | Not created |
-| `terraform/providers.tf` | Not created |
-| `terraform/variables.tf` | Not created |
-| `terraform/outputs.tf` | Not created |
-| `terraform/main.tf` | Not created |
-| `terraform/environments/demo.tfvars` | Not created |
-| `terraform/modules/networking/` | Not created |
-| `terraform/modules/ecr/` | Not created |
-| `terraform/modules/eks/` | Not created |
-| `terraform/modules/iam/` | Not created |
-| `terraform/modules/secrets/` | Not created |
+| `terraform/backend.tf` | Created |
+| `terraform/providers.tf` | Created |
+| `terraform/variables.tf` | Created |
+| `terraform/outputs.tf` | Created |
+| `terraform/main.tf` | Created |
+| `terraform/versions.tf` | Created |
+| `terraform/envs/prod/demo.tfvars.example` | Created |
+| `terraform/modules/networking/` | Interface created |
+| `terraform/modules/ecr/` | Interface created |
+| `terraform/modules/eks/` | Interface created |
+| `terraform/modules/iam/` | Interface created |
+| `terraform/modules/secrets/` | Interface created |
 
 ## Infrastructure
 
@@ -36,7 +37,7 @@
 | IAM | Cluster, node, CI/CD, and deployment roles | Not defined |
 | OIDC | CI/CD trust and EKS OIDC provider where needed | Not defined |
 | Secrets Manager | Runtime or deployment secrets | Not defined |
-| Tags | `Project=minimal-mlops-devsecops-pipeline` | Not defined |
+| Tags | `Project=minimal-mlops-devsecops-pipeline` | Defined in variables |
 
 ## Review Gates
 
@@ -44,6 +45,7 @@
 |---|---|
 | `terraform fmt` | Codex or owner |
 | `terraform validate` | Codex or owner |
+| `terraform init -backend=false` | Codex or owner |
 | `terraform plan` | Owner |
 | Billable resource review | Owner |
 | Permission-sensitive review | Owner |

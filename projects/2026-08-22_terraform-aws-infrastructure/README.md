@@ -8,7 +8,7 @@ Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 
-`active` - 2026-08-22. Terraform scope is recorded. Terraform files, backend, variables, plans, and AWS resources have not been created.
+`active` - 2026-08-22. Terraform root files, local backend note, environment values, module directories, and module interfaces are created in `<local-implementation-repo>`. Terraform 1.15.8 is installed locally. `terraform fmt -recursive`, `terraform init -backend=false`, and `terraform validate` pass. No AWS resources have been planned, created, changed, or deleted.
 
 ## Operating Boundary
 
@@ -23,8 +23,10 @@ terraform/
 |-- variables.tf
 |-- outputs.tf
 |-- main.tf
-|-- environments/
-|   `-- demo.tfvars
+|-- versions.tf
+|-- envs/
+|   `-- prod/
+|       `-- demo.tfvars.example
 `-- modules/
     |-- networking/
     |-- ecr/
@@ -35,20 +37,20 @@ terraform/
 
 Terraform must tag demo-owned resources with `Project=minimal-mlops-devsecops-pipeline` so cleanup can distinguish demo resources from shared account resources.
 
-> [CONFIRM] Terraform backend type, state bucket, lock table, final VPC design, node shape, and CI/CD OIDC provider are not finalized yet.
+Local state is the current demo choice. Remote S3 backend and DynamoDB locking are not configured because this is a one-owner, short-lived demo and no AWS resources should be created before plan review. Committed environment values live in `demo.tfvars.example`; the owner copies them to an ignored local `demo.tfvars` file before planning.
+
+> [CONFIRM] Final VPC design, node shape, and CI/CD OIDC provider are not finalized yet.
 
 ## Next
 
-1. Choose local state or remote S3 plus DynamoDB state locking.
-2. Create Terraform layout with providers, variables, outputs, backend configuration, and `environments/demo.tfvars`.
-3. Define networking for the one-day demo.
-4. Define ECR repository and image policy.
-5. Define EKS cluster and CPU-only node capacity.
-6. Define IAM roles, OIDC trust, Secrets Manager entries, and least-privilege policies.
-7. Run `terraform fmt`.
-8. Run `terraform validate`.
-9. Owner runs `terraform plan` and reviews billable or permission-sensitive resources.
-10. Owner runs `terraform apply` only after accepting the reviewed plan.
+1. Define networking resources after VPC/subnet review.
+2. Define ECR repository and image policy.
+3. Define EKS cluster and CPU-only node capacity.
+4. Define IAM roles, OIDC trust, Secrets Manager entries, and least-privilege policies.
+5. Re-run `terraform fmt`.
+6. Re-run `terraform validate`.
+7. Owner runs `terraform plan` and reviews billable or permission-sensitive resources.
+8. Owner runs `terraform apply` only after accepting the reviewed plan.
 
 ## Files
 
