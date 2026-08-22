@@ -23,8 +23,8 @@
 | Check | Tool | Status |
 |---|---|---|
 | Unit tests | pytest | Passing: 3 tests on 2026-08-22 |
-| Linting | | Not created |
-| Dependency check | | Not created |
+| Linting | ruff | Passing on 2026-08-22 |
+| Dependency check | pip-audit | Passing on 2026-08-22 |
 | Local API run command | uvicorn | Recorded in implementation README |
 | Local test command | pytest | Recorded in implementation README |
 
@@ -43,3 +43,5 @@
 | Local verification status | Passed on 2026-08-22 |
 
 The local container runs and the health, prediction, and metrics endpoints are verified. Do not move to ECR push or deployment work until linting and dependency checks exist.
+
+The local linting and dependency checks pass. The implementation CI workflow runs tests, linting, dependency audit, and Docker build before any later ECR push step is added.

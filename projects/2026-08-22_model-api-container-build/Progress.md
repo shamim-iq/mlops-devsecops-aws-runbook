@@ -2,7 +2,7 @@
 
 ## Current State
 
-`active` - 2026-08-22. The FastAPI app loads `app/model/model.pkl` for `/predict`. `scripts/train_model.py` trains Logistic Regression on the built-in scikit-learn Iris dataset and writes the artifact. Python 3.12.8 is installed, dependencies are installed in `.venv`, and `pytest` passes with 3 tests. Docker builds `mlops-prediction-api:local`, the container runs on port `8000`, and health, prediction, and metrics endpoints are verified.
+`active` - 2026-08-22. The FastAPI app loads `app/model/model.pkl` for `/predict`. `scripts/train_model.py` trains Logistic Regression on the built-in scikit-learn Iris dataset and writes the artifact. Python 3.12.8 is installed, dependencies are installed in `.venv`, and `pytest` passes with 3 tests. Docker builds `mlops-prediction-api:local`, the container runs, and health, prediction, and metrics endpoints are verified. `ruff` and `pip-audit` pass locally, and the CI workflow runs tests, linting, dependency audit, then Docker build.
 
 ## Done
 
@@ -34,8 +34,17 @@
 - [x] Verify container health endpoint: `{"status":"ok"}`.
 - [x] Verify container prediction endpoint returns `model_version` `iris-logreg-0.1.0`.
 - [x] Verify container metrics endpoint exposes `/predict` request count and prediction latency.
+- [x] Add linting command: `ruff check app scripts tests`.
+- [x] Add dependency check command: `pip-audit -r requirements-dev.txt`.
+- [x] Split runtime and development dependencies.
+- [x] Add CI workflow with tests, linting, dependency audit, then Docker build.
+- [x] Run linting locally: passed.
+- [x] Run dependency audit locally: no known vulnerabilities found.
+- [x] Rebuild Docker image after dependency changes.
+- [x] Smoke test rebuilt container health, prediction, and metrics endpoints.
 
 ## Remaining
 
-- [ ] Add linting command.
-- [ ] Add dependency check command.
+- [ ] Commit and push linting, dependency audit, and CI workflow changes.
+- [ ] Open or update the implementation pull request.
+- [ ] Merge after review.
