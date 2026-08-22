@@ -40,5 +40,6 @@
 | Health verification command | `curl http://localhost:8000/health` |
 | Prediction verification command | `curl -X POST http://localhost:8000/predict -H "Content-Type: application/json" -d "{\"feature_a\":1,\"feature_b\":1,\"feature_c\":0}"` |
 | Metrics verification command | `curl http://localhost:8000/metrics` |
+| Local verification status | Passed on 2026-08-22 |
 
-Do not move to ECR push or deployment work until the local container runs and the health, prediction, and metrics endpoints are verified.
+The local container runs and the health, prediction, and metrics endpoints are verified. Do not move to ECR push or deployment work until linting and dependency checks exist.
