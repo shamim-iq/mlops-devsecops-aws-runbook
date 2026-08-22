@@ -31,13 +31,13 @@
 
 | Area | Required | Status |
 |---|---|---|
-| Networking | VPC, subnets, routes, security groups | Not defined |
-| ECR | Repository and lifecycle/scanning settings | Not defined |
-| EKS | Cluster and CPU-only worker capacity | Not defined |
-| IAM | Cluster, node, CI/CD, and deployment roles | Not defined |
-| OIDC | CI/CD trust and EKS OIDC provider where needed | Not defined |
-| Secrets Manager | Runtime or deployment secrets | Not defined |
-| Tags | `Project=minimal-mlops-devsecops-pipeline` | Defined in variables |
+| Networking | VPC, subnets, routes, security groups | Defined, applied, verified |
+| ECR | Repository and lifecycle/scanning settings | Defined, applied, verified |
+| EKS | Cluster and CPU-only worker capacity | Defined, applied, verified |
+| IAM | Cluster, node, CI/CD, and deployment roles | Defined, applied, verified |
+| OIDC | CI/CD trust and EKS OIDC provider where needed | Defined, applied, verified |
+| Secrets Manager | Runtime or deployment secrets | Defined, applied, verified |
+| Tags | `Project=minimal-mlops-devsecops-pipeline` | Applied and verified |
 
 ## Review Gates
 
@@ -46,9 +46,19 @@
 | `terraform fmt` | Codex or owner |
 | `terraform validate` | Codex or owner |
 | `terraform init -backend=false` | Codex or owner |
-| `terraform plan` | Owner |
-| Billable resource review | Owner |
-| Permission-sensitive review | Owner |
-| `terraform apply` | Owner only |
+| `terraform plan` | Owner - complete |
+| Billable resource review | Owner - complete |
+| Permission-sensitive review | Owner - complete |
+| `terraform apply` | Owner only - complete |
+
+## Closeout
+
+| Item | Status |
+|---|---|
+| Read-only AWS verification | Complete |
+| Final no-drift Terraform plan | Complete |
+| Implementation repository commit and push | Pending owner |
+| Pull request evidence update | Pending owner |
+| Demo cleanup | Pending after demonstration |
 
 Codex must not run `terraform apply`, use `<deployment-aws-profile>`, or make AWS resource changes.

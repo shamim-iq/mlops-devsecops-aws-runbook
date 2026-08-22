@@ -8,7 +8,7 @@ Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 
-`active` - 2026-08-22. Terraform root files, local backend note, environment values, module directories, and module interfaces are created in `<local-implementation-repo>`. Terraform 1.15.8 is installed locally. `terraform fmt -recursive`, `terraform init -backend=false`, and `terraform validate` pass. No AWS resources have been planned, created, changed, or deleted.
+`active` - 2026-08-22. Terraform resources are defined, applied by the owner, and verified with the read-only AWS profile. `terraform fmt -recursive`, `terraform validate`, and `terraform plan -var-file="envs/prod/demo.tfvars"` pass, with the final plan reporting no changes. Implementation repository changes are ready for owner review, staging, commit, and push.
 
 ## Operating Boundary
 
@@ -37,20 +37,17 @@ terraform/
 
 Terraform must tag demo-owned resources with `Project=minimal-mlops-devsecops-pipeline` so cleanup can distinguish demo resources from shared account resources.
 
-Local state is the current demo choice. Remote S3 backend and DynamoDB locking are not configured because this is a one-owner, short-lived demo and no AWS resources should be created before plan review. Committed environment values live in `demo.tfvars.example`; the owner copies them to an ignored local `demo.tfvars` file before planning.
+Local state is the current demo choice. Remote S3 backend and DynamoDB locking are not configured because this is a one-owner, short-lived demo. Committed environment values live in `demo.tfvars.example`; the ignored local `demo.tfvars` file carries the deployment AWS CLI profile and concrete local values.
 
-> [CONFIRM] Final VPC design, node shape, and CI/CD OIDC provider are not finalized yet.
+The applied stack includes a tagged demo VPC, two public subnets, two private subnets, an internet gateway, one NAT gateway, ECR repository with immutable tags and scan-on-push, EKS cluster, one CPU-only managed node group, EKS core add-ons, GitHub Actions OIDC roles, an EKS workload OIDC provider, and an empty Secrets Manager runtime secret container.
 
 ## Next
 
-1. Define networking resources after VPC/subnet review.
-2. Define ECR repository and image policy.
-3. Define EKS cluster and CPU-only node capacity.
-4. Define IAM roles, OIDC trust, Secrets Manager entries, and least-privilege policies.
-5. Re-run `terraform fmt`.
-6. Re-run `terraform validate`.
-7. Owner runs `terraform plan` and reviews billable or permission-sensitive resources.
-8. Owner runs `terraform apply` only after accepting the reviewed plan.
+1. Owner reviews changed implementation files, then stages, commits, and pushes them.
+2. Owner updates the pull request with the applied Terraform evidence.
+3. Keep `terraform/envs/prod/demo.tfvars`, Terraform state, plan files, and local policy files with concrete account identifiers out of commits.
+4. Run `terraform plan -var-file="envs/prod/demo.tfvars"` before later changes and expect no drift unless the owner intentionally changes the stack.
+5. Clean up all demo AWS resources when the demonstration is finished.
 
 ## Files
 

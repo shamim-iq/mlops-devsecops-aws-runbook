@@ -2,7 +2,7 @@
 
 ## Current State
 
-`active` - 2026-08-22. Terraform root files, local backend note, environment values, module directories, and module interfaces are created in `<local-implementation-repo>`. Terraform 1.15.8 is installed locally. `terraform fmt -recursive`, `terraform init -backend=false`, and `terraform validate` pass. No AWS resources have been planned, created, changed, or deleted.
+`active` - 2026-08-22. Terraform resources are implemented, applied by the owner, and verified with the read-only AWS profile. The deployed stack is in sync with Terraform: `terraform plan -var-file="envs/prod/demo.tfvars"` reports no changes. Implementation repository changes are not staged, committed, or pushed yet.
 
 ## Done
 
@@ -20,17 +20,23 @@
 - [x] Run `terraform fmt -recursive`.
 - [x] Run `terraform init -backend=false`.
 - [x] Run `terraform validate`: passed.
+- [x] Define networking resources.
+- [x] Define ECR resources.
+- [x] Define EKS resources with CPU-only worker capacity.
+- [x] Define IAM and OIDC resources.
+- [x] Define Secrets Manager resources.
+- [x] Configure Terraform to read the local AWS CLI profile from ignored `demo.tfvars`.
+- [x] Owner ran `terraform plan`.
+- [x] Owner reviewed billable resources.
+- [x] Owner reviewed permission-sensitive resources.
+- [x] Owner ran `terraform apply` after plan acceptance.
+- [x] Verify deployment with read-only AWS profile.
+- [x] Confirm final Terraform plan reports no changes.
 
 ## Remaining
 
-- [ ] Define networking resources.
-- [ ] Define ECR resources.
-- [ ] Define EKS resources.
-- [ ] Define IAM and OIDC resources.
-- [ ] Define Secrets Manager resources.
-- [ ] Re-run `terraform fmt`.
-- [ ] Re-run `terraform validate`.
-- [ ] Owner runs `terraform plan`.
-- [ ] Owner reviews billable resources.
-- [ ] Owner reviews permission-sensitive resources.
-- [ ] Owner runs `terraform apply` after plan acceptance.
+- [ ] Owner reviews changed implementation files.
+- [ ] Owner stages, commits, and pushes implementation repository changes.
+- [ ] Owner updates the pull request with applied Terraform evidence.
+- [ ] Keep local-only files and concrete AWS account identifiers out of committed runbook files.
+- [ ] Clean up demo AWS resources when the demonstration is finished.
