@@ -8,7 +8,7 @@ Project owner - implementation repository `<implementation-repository-url>`.
 
 ## Status
 
-`active` - 2026-08-22. The FastAPI service now loads `app/model/model.pkl` for `/predict`. `scripts/train_model.py` trains Logistic Regression on the built-in scikit-learn Iris dataset and writes the artifact. Python 3.12.8 is installed, dependencies are installed in `.venv`, and `pytest` passes with 3 tests. Linting, dependency check, and container verification are not created yet.
+`active` - 2026-08-22. The FastAPI service loads `app/model/model.pkl` for `/predict`. `scripts/train_model.py` trains Logistic Regression on the built-in scikit-learn Iris dataset and writes the artifact. Python 3.12.8 is installed, dependencies are installed in `.venv`, and `pytest` passes with 3 tests. Docker builds `mlops-prediction-api:local`, the container runs, and health, prediction, and metrics endpoints are verified. `ruff` linting and `pip-audit` dependency audit pass locally, and the CI workflow runs tests, linting, dependency audit, then Docker build.
 
 ## Application Shape
 
@@ -33,10 +33,10 @@ The model uses the built-in scikit-learn Iris dataset and Logistic Regression. T
 
 ## Next
 
-1. Add linting and dependency checks.
-2. Build and run the container locally.
-3. Verify the health, prediction, and metrics endpoints from the running container.
-4. Record the container verification output.
+1. Commit and push the linting, dependency audit, and CI workflow changes.
+2. Open or update the implementation pull request.
+3. Merge this project after the implementation and runbook pull requests pass review.
+4. Move to CI access and approval pipeline work for security scans, image scan, ECR push, and manual approval.
 
 ## Files
 

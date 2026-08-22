@@ -23,8 +23,8 @@
 | Check | Tool | Status |
 |---|---|---|
 | Unit tests | pytest | Passing: 3 tests on 2026-08-22 |
-| Linting | | Not created |
-| Dependency check | | Not created |
+| Linting | ruff | Passing on 2026-08-22 |
+| Dependency check | pip-audit | Passing on 2026-08-22 |
 | Local API run command | uvicorn | Recorded in implementation README |
 | Local test command | pytest | Recorded in implementation README |
 
@@ -40,5 +40,8 @@
 | Health verification command | `curl http://localhost:8000/health` |
 | Prediction verification command | `curl -X POST http://localhost:8000/predict -H "Content-Type: application/json" -d "{\"feature_a\":1,\"feature_b\":1,\"feature_c\":0}"` |
 | Metrics verification command | `curl http://localhost:8000/metrics` |
+| Local verification status | Passed on 2026-08-22 |
 
-Do not move to ECR push or deployment work until the local container runs and the health, prediction, and metrics endpoints are verified.
+The local container runs and the health, prediction, and metrics endpoints are verified. Do not move to ECR push or deployment work until linting and dependency checks exist.
+
+The local linting and dependency checks pass. The implementation CI workflow runs tests, linting, dependency audit, and Docker build before any later ECR push step is added.
