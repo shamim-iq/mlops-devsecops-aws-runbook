@@ -2,7 +2,7 @@
 
 ## Current State
 
-`active` - 2026-08-22. The implementation repository exists and the initial single-repository structure is pushed to `main` at commit `18518cf`. Kubernetes manifests are placeholders only.
+`active` - 2026-08-22. The implementation repository exists and the application branch is merged to `main`. The prediction API GitOps tree now has valid Kustomize resources for the namespace, service, Argo Rollouts rollout, Prometheus analysis template, production overlay, and image tag patch. `kubectl kustomize k8s/apps/prediction-api/overlays/prod` passes locally.
 
 ## Done
 
@@ -19,11 +19,17 @@
 - [x] Document the first push steps for the owner.
 - [x] Add placeholder files so Git tracks the structure.
 - [x] Push the initial single-repository structure.
+- [x] Replace prediction API base placeholders with Kubernetes manifests.
+- [x] Add Argo Rollouts canary behavior.
+- [x] Add Prometheus analysis template.
+- [x] Add production Kustomize overlay.
+- [x] Add CD-owned image tag patch file.
+- [x] Fill platform install notes for Argo CD, Argo Rollouts, Prometheus, and EFK.
+- [x] Validate production overlay with `kubectl kustomize`.
 
 ## Remaining
 
-- [ ] Replace placeholder files with real app, Terraform, and Kubernetes content.
-- [ ] Fill application manifests.
-- [ ] Fill Argo Rollouts canary behavior.
-- [ ] Fill Prometheus analysis template thresholds.
-- [ ] Fill Helm install notes and resource requests for platform add-ons.
+- [ ] Review and commit the GitOps structure changes.
+- [ ] Push the `gitops-repository-structure` branch.
+- [ ] Open the implementation pull request.
+- [ ] Re-check platform add-on resource requests after Terraform defines EKS node capacity.

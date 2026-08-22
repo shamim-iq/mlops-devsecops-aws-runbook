@@ -14,14 +14,15 @@
 
 | Area | Path | Status |
 |---|---|---|
-| Prediction API base manifests | `k8s/apps/prediction-api/base/` | Placeholder pushed |
-| Production overlay | `k8s/apps/prediction-api/overlays/prod/` | Placeholder pushed |
-| Argo Rollouts resources | `k8s/apps/prediction-api/base/rollout.yaml` | Defined, not pushed |
-| Prometheus analysis templates | `k8s/apps/prediction-api/base/analysis-template.yaml` | Defined, not pushed |
-| Argo CD install notes | `k8s/platform/argocd/install-notes.md` | Placeholder pushed |
-| Argo Rollouts install notes | `k8s/platform/argo-rollouts/install-notes.md` | Placeholder pushed |
-| Prometheus install notes | `k8s/platform/prometheus/install-notes.md` | Placeholder pushed |
-| EFK install notes | `k8s/platform/efk/install-notes.md` | Placeholder pushed |
-| General install notes | `docs/install-notes.md` | Placeholder pushed |
+| Prediction API base manifests | `k8s/apps/prediction-api/base/` | Created locally |
+| Production overlay | `k8s/apps/prediction-api/overlays/prod/` | Created locally |
+| Argo Rollouts resources | `k8s/apps/prediction-api/base/rollout.yaml` | Created locally |
+| Prometheus analysis templates | `k8s/apps/prediction-api/base/analysis-template.yaml` | Created locally |
+| Image tag patch | `k8s/apps/prediction-api/overlays/prod/image-tag.yaml` | Created locally |
+| Argo CD install notes | `k8s/platform/argocd/install-notes.md` | Filled locally |
+| Argo Rollouts install notes | `k8s/platform/argo-rollouts/install-notes.md` | Filled locally |
+| Prometheus install notes | `k8s/platform/prometheus/install-notes.md` | Filled locally |
+| EFK install notes | `k8s/platform/efk/install-notes.md` | Filled locally |
+| General install notes | `docs/install-notes.md` | Filled locally |
 
-Do not build the CD workflow until the placeholder Kubernetes files are replaced with valid manifests and the Argo CD source path contains a valid Kustomize tree.
+The Argo CD source path contains a Kustomize tree that builds locally. Do not build the CD workflow until Terraform defines ECR, EKS, OIDC, and the image tag update path.

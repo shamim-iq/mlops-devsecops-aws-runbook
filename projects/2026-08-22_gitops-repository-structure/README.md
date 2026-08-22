@@ -8,7 +8,7 @@ Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 
-`active` - 2026-08-22. The implementation repository is `<implementation-repository-url>`, and the local working directory is `<local-implementation-repo>`. The repository holds the app, Terraform, CI, docs, and Kubernetes desired state together. The initial tracked structure was pushed to `main` at commit `18518cf`.
+`active` - 2026-08-22. The implementation repository is `<implementation-repository-url>`, and the local working directory is `<local-implementation-repo>`. The repository holds the app, Terraform, CI, docs, and Kubernetes desired state together. The prediction API Kustomize tree now has namespace, service, Argo Rollouts `Rollout`, Prometheus `AnalysisTemplate`, production overlay, image patch file, and platform install notes. `kubectl kustomize k8s/apps/prediction-api/overlays/prod` passes locally.
 
 ## Repository Shape
 
@@ -59,11 +59,10 @@ Keep rollout and analysis resources inside the Kubernetes application base so th
 
 ## Next
 
-1. Replace placeholder files with the FastAPI service skeleton and project README content.
-2. Define the base Kubernetes manifests for the FastAPI prediction API.
-3. Define Argo Rollouts canary behavior in `k8s/apps/prediction-api/base/rollout.yaml`.
-4. Define Prometheus analysis in `k8s/apps/prediction-api/base/analysis-template.yaml`.
-5. Record Helm install notes and resource requests for Argo CD, Argo Rollouts, Prometheus, and minimal EFK.
+1. Review the GitOps manifest branch.
+2. Commit and push the GitOps structure changes.
+3. Open the implementation pull request for review.
+4. Start Terraform AWS infrastructure after the desired-state structure is merged.
 
 ## Files
 
