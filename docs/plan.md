@@ -138,4 +138,5 @@ The EKS footprint stays CPU-only and temporary. The current candidate uses one `
 | [Rollouts Prometheus analysis](../projects/2026-08-22_rollouts-prometheus-analysis/README.md) | Argo Rollouts canary delivery, Prometheus metrics, and analysis templates |
 | [Minimal EFK logging](../projects/2026-08-22_minimal-efk-logging/README.md) | Helm-based Elasticsearch, Fluent Bit, Kibana, retention, storage, and log verification |
 | [CD rollout promotion rollback](../projects/2026-08-22_cd-rollout-promotion-rollback/README.md) | GitOps image updates, Argo CD reconciliation, healthy promotion, and failed rollback proof |
+| [Application topology view](../projects/2026-08-22_application-topology-view/README.md) | Source, CI, registry, GitOps, EKS runtime, rollout, metrics, logs, evidence, and cleanup topology |
 | [Evidence and cleanup](../projects/2026-08-22_evidence-and-cleanup/README.md) | CV/demo evidence, destroy review, workload teardown, Terraform destroy, billing and inventory verification |

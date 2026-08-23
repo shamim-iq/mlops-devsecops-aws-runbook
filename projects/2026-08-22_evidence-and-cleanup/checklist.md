@@ -10,8 +10,12 @@
 | Secrets scan result | CI/CD platform or scanner output | Not captured |
 | Trivy image scan result | CI/CD platform or scanner output | Not captured |
 | Image in ECR | AWS ECR console or CLI output | Not captured |
+| Production approval | GitHub Actions environment approval | Not captured |
+| GitOps image update | Repository commit or workflow output | Not captured |
 | Argo CD sync | Argo CD UI or CLI output | Not captured |
+| EKS workload health | Argo CD workload view or kubectl output | Not captured |
 | Rollout promotion | Argo Rollouts UI or CLI output | Not captured |
+| Prometheus analysis | Prometheus UI or AnalysisRun output | Not captured |
 | Rollback | Argo Rollouts UI or CLI output | Not captured |
 | Logs | Kibana or log query output | Not captured |
 | Cleanup | Terraform and AWS verification output | Not captured |

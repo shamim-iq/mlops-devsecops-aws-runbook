@@ -4,6 +4,7 @@
 
 | Field | Value |
 |---|---|
+| Implementation language | Python |
 | Config style | One small YAML file |
 | Required app fields | `name`, `namespace`, `selector` |
 | First app | `prediction-api` |
@@ -41,7 +42,20 @@ Generate one Markdown file per application. Each report should include one Merma
 
 | Field | Value |
 |---|---|
-| Output path | `topology/prediction-api.md` |
+| Output path | `topology/reports/prediction-api.md` |
 | Graph format | Mermaid `flowchart LR` |
 | Detail format | Markdown tables |
 | Generated from | Read-only Kubernetes API discovery |
+
+## Read-Only Access
+
+| Item | Requirement |
+|---|---|
+| Namespace scope | Prefer namespace-scoped Role and RoleBinding for the first app |
+| Verbs | `get`, `list`, `watch` only |
+| Core resources | Pods, Services, ConfigMaps, Secrets, PersistentVolumeClaims, Events |
+| Apps resources | Deployments and ReplicaSets |
+| Networking resources | Ingresses |
+| Autoscaling resources | HPAs |
+| Argo Rollouts resources | Rollouts |
+| Cluster-scoped resources | Avoid unless PersistentVolumes are needed |

@@ -8,7 +8,7 @@ Project owner - Kubernetes cluster and repositories kept private.
 
 ## Status
 
-`active` - 2026-08-22. Scope is defined and Markdown with Mermaid is selected as the first output format. No implementation files, Kubernetes permissions, generated topology report, or CLI have been created.
+`active` - 2026-08-23. Scope is defined, Python is selected for the first implementation, and Markdown with Mermaid is selected as the first output format. The first implementation plan is recorded. No implementation files, Kubernetes permissions, generated topology report, or CLI have been created.
 
 ## How It Works
 
@@ -46,14 +46,36 @@ Keep configuration intentionally small:
 
 Do not introduce custom resource definitions for the topology tool. Standard Kubernetes labels, owner references, selectors, and references are enough for the first version.
 
+## Implementation Plan
+
+The first build should live in the implementation repository, not this runbook repository. Python is the smallest fit because the current application already uses Python, the Kubernetes client is mature, and a Markdown generator does not need a service runtime.
+
+```text
+topology/
+  -> apps.yaml
+  -> topology_view/
+     |-- cli.py
+     |-- config.py
+     |-- discover.py
+     |-- graph.py
+     `-- render_markdown.py
+  -> reports/
+     `-- prediction-api.md
+```
+
+Discovery should run with read-only Kubernetes credentials. The first report can be generated manually by the owner after the demo cluster exists, then stored as evidence if it explains the deployment better than the Argo CD resource tree alone.
+
 ## Next
 
-1. Pick implementation language: Python is the smallest fit for this repo.
-2. Define the read-only Kubernetes permissions.
-3. Create the app config file format.
-4. Build the discovery logic for workloads, services, ingress, config, secrets, storage, and events.
-5. Generate `topology/prediction-api.md` with a Mermaid graph and resource detail tables.
-6. Add the generated report to demo evidence if it is useful.
+1. Add the topology tool files to the implementation repository.
+2. Define the read-only Kubernetes Role and RoleBinding for the selected namespace.
+3. Create `topology/apps.yaml` with the `prediction-api` namespace and selector.
+4. Implement config loading and validation.
+5. Implement Kubernetes discovery for workloads, ReplicaSets, Pods, Services, Ingresses, ConfigMaps, Secrets, PVCs, HPAs, and Events.
+6. Implement Mermaid graph generation.
+7. Implement Markdown detail tables.
+8. Generate `topology/reports/prediction-api.md`.
+9. Add the generated report to demo evidence if it is useful.
 
 ## Files
 
@@ -61,3 +83,4 @@ Do not introduce custom resource definitions for the topology tool. Standard Kub
 |---|---|
 | [Progress.md](./Progress.md) | What topology work is done and what remains |
 | [checklist.md](./checklist.md) | Discovery scope, config fields, output, and RBAC decisions |
+| [plan.md](./plan.md) | Ordered implementation steps for the first topology report |
