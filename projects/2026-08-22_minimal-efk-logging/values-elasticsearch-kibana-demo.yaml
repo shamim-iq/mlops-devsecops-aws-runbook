@@ -1,0 +1,92 @@
+# Minimal demo Elasticsearch plus bundled Kibana values.
+# Owner applies this with Helm against the demo EKS cluster.
+
+global:
+  kibanaEnabled: true
+
+clusterName: prediction-api-logs
+
+image:
+  registry: docker.io
+  repository: bitnamilegacy/elasticsearch
+  tag: 9.1.2-debian-12-r0
+
+security:
+  enabled: false
+
+sysctlImage:
+  registry: docker.io
+  repository: bitnamilegacy/os-shell
+  tag: 12-debian-12-r50
+  resources:
+    requests:
+      cpu: 10m
+      memory: 32Mi
+    limits:
+      cpu: 50m
+      memory: 64Mi
+
+master:
+  masterOnly: false
+  replicaCount: 1
+  resourcesPreset: "none"
+  resources:
+    requests:
+      cpu: 250m
+      memory: 768Mi
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+  heapSize: 384m
+  persistence:
+    enabled: false
+
+data:
+  replicaCount: 0
+
+coordinating:
+  replicaCount: 0
+
+ingest:
+  enabled: false
+  replicaCount: 0
+
+metrics:
+  enabled: false
+
+kibana:
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/kibana
+    tag: 9.1.2-debian-12-r0
+  replicaCount: 1
+  persistence:
+    enabled: false
+  resourcesPreset: "none"
+  resources:
+    requests:
+      cpu: 100m
+      memory: 512Mi
+    limits:
+      cpu: 500m
+      memory: 1280Mi
+  startupProbe:
+    enabled: true
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    timeoutSeconds: 5
+    failureThreshold: 60
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 120
+    periodSeconds: 15
+    timeoutSeconds: 10
+    failureThreshold: 20
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 300
+    periodSeconds: 20
+    timeoutSeconds: 10
+    failureThreshold: 12
+  service:
+    type: ClusterIP

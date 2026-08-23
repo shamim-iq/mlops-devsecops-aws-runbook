@@ -8,7 +8,7 @@ Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 
-`active` - 2026-08-22. The minimal EFK logging scope is recorded. Helm chart choices, namespaces, storage size, retention, and install values are not yet finalized.
+`complete` - 2026-08-23. The owner installed the minimal EFK stack, applied one-day retention, verified `prediction-api` namespace logs in Elasticsearch, and confirmed Elasticsearch, Kibana, and Fluent Bit run together after temporarily scaling the node group to two nodes. Codex did not install Helm charts or change live EKS logging resources.
 
 ## Operating Boundary
 
@@ -23,21 +23,14 @@ application and Kubernetes logs
   -> Kibana
 ```
 
-EFK is for demo evidence and short-term troubleshooting only. Retention, replicas, storage, and resource requests must stay minimal.
-
-> [CONFIRM] Helm chart names, chart versions, namespace, Elasticsearch storage size, retention policy, Kibana access method, and resource limits are not recorded yet.
+EFK is for demo evidence and short-term troubleshooting only. Elasticsearch uses one multi-role pod with ephemeral demo storage, Kibana runs as the bundled Bitnami subchart, and Fluent Bit runs as the official collector DaemonSet. Logs are scoped to the `prediction-api` namespace and indexed as `prediction-api-logs*`, with Index Lifecycle Management deleting matching indices after one day. The original single-node cluster hit its pod limit, so the owner temporarily scaled the node group to two nodes to run Elasticsearch, Kibana, and Fluent Bit at the same time.
 
 ## Next
 
-1. Choose Helm charts and versions for Elasticsearch, Fluent Bit, and Kibana.
-2. Record the logging namespace.
-3. Set Elasticsearch storage size and replica count.
-4. Set log retention or index cleanup approach.
-5. Set CPU and memory requests for the logging components.
-6. Decide Kibana access method for the demo.
-7. Owner installs EFK with Helm.
-8. Owner verifies application logs appear in Kibana.
-9. Owner records cleanup commands for EFK resources.
+1. Owner verifies the `prediction-api-logs*` data view in Kibana Discover.
+2. Owner records non-sensitive EFK evidence.
+3. Owner removes EFK resources during cleanup.
+4. Owner scales the node group back down during cleanup.
 
 ## Files
 
@@ -45,3 +38,6 @@ EFK is for demo evidence and short-term troubleshooting only. Retention, replica
 |---|---|
 | [Progress.md](./Progress.md) | EFK logging work completed and remaining |
 | [checklist.md](./checklist.md) | Helm chart, retention, storage, and access decisions |
+| [owner-commands.md](./owner-commands.md) | Owner-run install, verification, evidence, and cleanup commands |
+| [values-elasticsearch-kibana-demo.yaml](./values-elasticsearch-kibana-demo.yaml) | Minimal Elasticsearch and bundled Kibana Helm values |
+| [values-fluent-bit-collector-demo.yaml](./values-fluent-bit-collector-demo.yaml) | Minimal Fluent Bit collector Helm values |
