@@ -42,6 +42,7 @@
 - [x] Run dependency audit locally: no known vulnerabilities found.
 - [x] Rebuild Docker image after dependency changes.
 - [x] Smoke test rebuilt container health, prediction, and metrics endpoints.
+- [x] Document prediction app functionality and training flow.
 
 ## Remaining
 
