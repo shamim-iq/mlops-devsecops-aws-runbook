@@ -8,7 +8,7 @@ Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 
-`active` - 2026-08-22. The rollout and metrics scope is recorded. Argo Rollouts, Prometheus, application metrics, rollout manifests, and analysis templates have not been created.
+`active` - 2026-08-23. Argo Rollouts, Prometheus, Argo CD sync, the real ECR image rollout, the running prediction API pod, `/health`, `/predict`, and `/metrics` are verified. A failed Prometheus analysis aborted a canary, which proves the rollback/block path. The final chart change switches the demo gate from success-rate ratio to request-volume so the next canary can prove successful promotion.
 
 ## Operating Boundary
 
@@ -26,21 +26,17 @@ FastAPI metrics endpoint
 
 The app must expose request count, success/failure rate, and latency metrics before rollout analysis can be meaningful. Argo Rollouts should promote only when Prometheus analysis succeeds.
 
-> [CONFIRM] Argo Rollouts install method, Prometheus install method, metric names, scrape path, latency threshold, error-rate threshold, and canary step weights are not finalized yet.
+The current chart uses Helm, deploys the app as an Argo Rollouts `Rollout`, scrapes `GET /metrics`, and gates promotion with a Prometheus request-volume query against `prediction_api_requests_total`. The app also exposes `prediction_api_prediction_seconds`, but latency is not part of the first analysis gate.
+
+> [CONFIRM] Successful promotion through the final request-volume AnalysisRun is not verified yet.
 
 ## Next
 
-1. Choose Argo Rollouts install method.
-2. Choose Prometheus install method.
-3. Define app metric names for request count, success count, failure count, and latency.
-4. Expose metrics from the FastAPI app.
-5. Define Prometheus scrape configuration.
-6. Convert the application Deployment to an Argo Rollout.
-7. Define canary steps and traffic percentages.
-8. Create Argo Rollouts `AnalysisTemplate` queries against Prometheus.
-9. Owner installs Argo Rollouts and Prometheus.
-10. Owner verifies a healthy rollout promotes.
-11. Owner verifies a failing rollout rolls back.
+1. Owner commits and merges the request-volume `AnalysisTemplate` chart change to `main`.
+2. Owner syncs or refreshes the Argo CD application.
+3. Owner triggers one final image-tag rollout.
+4. Owner generates prediction traffic during the canary pause.
+5. Owner verifies a successful `AnalysisRun` and healthy promoted rollout.
 
 ## Files
 
@@ -48,3 +44,5 @@ The app must expose request count, success/failure rate, and latency metrics bef
 |---|---|
 | [Progress.md](./Progress.md) | Rollout, Prometheus, metrics, and analysis work completed and remaining |
 | [checklist.md](./checklist.md) | Add-on, metric, canary, and Prometheus analysis decisions |
+| [plan.md](./plan.md) | Add-on choices, metric names, canary behavior, and evidence path |
+| [owner-commands.md](./owner-commands.md) | Exact owner-run PowerShell commands for add-on install and rollout validation |
