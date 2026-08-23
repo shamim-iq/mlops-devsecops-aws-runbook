@@ -19,8 +19,12 @@
 - [ ] Capture CI result.
 - [ ] Capture security scan result.
 - [ ] Capture ECR image evidence.
+- [ ] Capture production approval evidence.
+- [ ] Capture GitOps image update evidence.
 - [ ] Capture Argo CD sync evidence.
+- [ ] Capture EKS workload health evidence.
 - [ ] Capture rollout promotion evidence.
+- [ ] Capture Prometheus analysis evidence.
 - [ ] Capture rollback evidence.
 - [ ] Capture logging evidence.
 - [ ] Capture cleanup evidence.
