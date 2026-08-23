@@ -84,3 +84,4 @@ Discovery should run with read-only Kubernetes credentials. The first report can
 | [Progress.md](./Progress.md) | What topology work is done and what remains |
 | [checklist.md](./checklist.md) | Discovery scope, config fields, output, and RBAC decisions |
 | [plan.md](./plan.md) | Ordered implementation steps for the first topology report |
+| [owner-commands.md](./owner-commands.md) | Owner-run implementation, RBAC, verification, and report-generation commands |
