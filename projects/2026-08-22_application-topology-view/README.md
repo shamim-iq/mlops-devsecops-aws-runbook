@@ -8,7 +8,7 @@ Project owner - Kubernetes cluster and repositories kept private.
 
 ## Status
 
-`active` - 2026-08-23. Scope is defined, Python is selected for the first implementation, and Markdown with Mermaid is selected as the first output format. The first implementation plan is recorded. No implementation files, Kubernetes permissions, generated topology report, or CLI have been created.
+`active` - 2026-08-23. Scope is defined, Python is selected for the first implementation, and Markdown with Mermaid is selected as the first output format. The implementation repository branch `application-topology-view-tool` contains the first topology tool, tests, CI lint inclusion, and read-only RBAC manifest. The owner still needs to review, commit, push, open the implementation pull request, run the owner-only Kubernetes verification, and generate the live report.
 
 ## How It Works
 
@@ -48,11 +48,12 @@ Do not introduce custom resource definitions for the topology tool. Standard Kub
 
 ## Implementation Plan
 
-The first build should live in the implementation repository, not this runbook repository. Python is the smallest fit because the current application already uses Python, the Kubernetes client is mature, and a Markdown generator does not need a service runtime.
+The first build lives in the implementation repository branch `application-topology-view-tool`. Python is the smallest fit because the current application already uses Python and a Markdown generator does not need a service runtime. Discovery shells out to `kubectl get ... -o json` instead of using the Kubernetes Python client so the tool avoids an extra HTTP dependency chain and stays close to the owner-run verification commands.
 
 ```text
 topology/
   -> apps.yaml
+  -> __init__.py
   -> topology_view/
      |-- cli.py
      |-- config.py
@@ -67,15 +68,12 @@ Discovery should run with read-only Kubernetes credentials. The first report can
 
 ## Next
 
-1. Add the topology tool files to the implementation repository.
-2. Define the read-only Kubernetes Role and RoleBinding for the selected namespace.
-3. Create `topology/apps.yaml` with the `prediction-api` namespace and selector.
-4. Implement config loading and validation.
-5. Implement Kubernetes discovery for workloads, ReplicaSets, Pods, Services, Ingresses, ConfigMaps, Secrets, PVCs, HPAs, and Events.
-6. Implement Mermaid graph generation.
-7. Implement Markdown detail tables.
-8. Generate `topology/reports/prediction-api.md`.
-9. Add the generated report to demo evidence if it is useful.
+1. Owner reviews, stages, commits, and pushes the implementation branch `application-topology-view-tool`.
+2. Owner opens the implementation repository pull request.
+3. Owner applies or verifies read-only Kubernetes access for `prediction-api`.
+4. Owner generates `topology/reports/prediction-api.md` from live cluster state.
+5. Owner scans the generated report for sensitive values.
+6. Add the generated report to demo evidence if it is useful.
 
 ## Files
 
