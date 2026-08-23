@@ -1,83 +1,86 @@
 # Application Topology View
 
-This project creates the single view of the demo application topology across source, CI, container registry, GitOps, EKS runtime, progressive delivery, metrics, logs, evidence, and cleanup. It exists so the owner can explain the deployed system without reconstructing it from separate project notes.
+This project defines a developer-facing Kubernetes topology view for one application at a time. It starts from a namespace and app selector, then discovers live relationships across workload, network, storage, and configuration resources so developers can see how the application is actually wired.
 
 ## Owner
 
-Project owner - AWS account kept private, preferred region `us-east-1`, CI/CD platform GitHub Actions.
+Project owner - Kubernetes cluster and repositories kept private.
 
 ## Status
 
-`active` - 2026-08-23. The topology project has started. The first topology map is based on the current runbook state: Terraform infrastructure is recorded as applied and verified, the application container path is recorded, the GitOps chart path is recorded, and the CD promotion and rollback proof is recorded. Live AWS, Kubernetes, Argo CD, Prometheus, EFK, and billing state still need owner-provided evidence before this view can be marked complete.
+`active` - 2026-08-23. Scope is defined, Python is selected for the first implementation, and Markdown with Mermaid is selected as the first output format. The first implementation plan is recorded. No implementation files, Kubernetes permissions, generated topology report, or CLI have been created.
 
-## Application Topology
+## How It Works
 
-```text
-Developer workstation
-  -> implementation repository
-     |-- app and tests
-     |-- Dockerfile
-     |-- Terraform
-     |-- GitHub Actions workflows
-     `-- k8s/apps/prediction-api/chart
-  -> GitHub Actions CI
-     |-- tests, linting, dependency audit, security scans
-     |-- Docker build
-     `-- Trivy image scan
-  -> Amazon ECR
-  -> manual production approval
-  -> GitOps image tag update
-  -> Argo CD Application: prediction-api-prod
-  -> EKS cluster
-     |-- prediction API namespace
-     |-- Argo Rollouts canary
-     |-- Kubernetes Service
-     |-- Prometheus scrape and rollout analysis
-     `-- EFK log collection
-  -> promotion, rollback, evidence, cleanup
+Use one small config file per app. The tool should not require developers to describe every Kubernetes object by hand because the cluster already has the relationship data.
+
+```yaml
+apps:
+  - name: prediction-api
+    namespace: prediction-api
+    selector:
+      app.kubernetes.io/name: prediction-api
 ```
 
-The implementation repository is both the application source and the GitOps source of truth. CI may build, scan, and push an image, but production deployment waits for manual approval before the GitOps image tag changes. Argo CD reconciles the approved desired state into EKS, then Argo Rollouts controls the canary. Prometheus analysis decides promotion or rollback, and EFK provides short-retention log evidence.
+The topology builder reads Kubernetes with read-only permissions, then follows standard relationships:
 
-## Runtime Boundary
+```text
+Rollout or Deployment -> ReplicaSet -> Pod
+Service -> Pod selector
+Ingress -> Service backend
+Pod -> ConfigMap, Secret, PVC, ServiceAccount
+PVC -> PersistentVolume
+HPA -> scale target
+Events -> involved object
+```
 
-The prediction API is a CPU-only FastAPI service that loads `app/model/model.pkl` and exposes health, prediction, and Prometheus metrics endpoints. Kubernetes desired state lives in the Helm chart at `k8s/apps/prediction-api/chart`, with production image values in `values-prod.yaml`.
+The first output is a Markdown report with a Mermaid graph and short resource detail tables. Markdown with Mermaid is the smallest useful format because it works in GitHub pull requests, runbook evidence, and local previews without a hosted service.
 
-The AWS footprint is demo-owned and temporary: tagged networking, ECR, EKS, one CPU-only managed node group, IAM/OIDC access, and Secrets Manager runtime secret container. Cleanup remains part of the topology because the demo is cost-controlled and short-lived.
+Keep configuration intentionally small:
 
-## Runtime Identifier Placeholders
-
-| Item | Value |
+| Field | Purpose |
 |---|---|
-| AWS account ID | Private, not committed |
-| AWS region | `us-east-1` |
-| ECR repository | `<ecr-repository-name>` |
-| EKS cluster | `<eks-cluster-name>` |
-| Kubernetes namespace | `<application-namespace>` |
-| Kubernetes service | `<prediction-api-service-name>` |
-| Argo CD application | `prediction-api-prod` |
-| GitOps branch | `main` |
-| GitOps chart path | `k8s/apps/prediction-api/chart` |
-| Production values file | `k8s/apps/prediction-api/chart/values-prod.yaml` |
-| Production image tag value | `image.tag` |
+| `name` | Display name for the app |
+| `namespace` | Namespace to query |
+| `selector` | Labels that identify the app's pods and workload resources |
 
-## Evidence Targets
+Do not introduce custom resource definitions for the topology tool. Standard Kubernetes labels, owner references, selectors, and references are enough for the first version.
 
-The topology is complete only when the owner can point to evidence for each link in the chain: CI result, image in ECR, manual approval, GitOps image update, Argo CD sync, healthy rollout promotion, failed rollout rollback, Prometheus analysis result, application logs, and cleanup verification.
+## Implementation Plan
 
-> [CONFIRM] Live Argo CD, EKS, Prometheus, EFK, ECR, and cleanup evidence locations are not recorded in this project yet.
+The first build should live in the implementation repository, not this runbook repository. Python is the smallest fit because the current application already uses Python, the Kubernetes client is mature, and a Markdown generator does not need a service runtime.
+
+```text
+topology/
+  -> apps.yaml
+  -> topology_view/
+     |-- cli.py
+     |-- config.py
+     |-- discover.py
+     |-- graph.py
+     `-- render_markdown.py
+  -> reports/
+     `-- prediction-api.md
+```
+
+Discovery should run with read-only Kubernetes credentials. The first report can be generated manually by the owner after the demo cluster exists, then stored as evidence if it explains the deployment better than the Argo CD resource tree alone.
 
 ## Next
 
-1. Owner records the evidence storage location.
-2. Owner captures evidence for the CI result, ECR image, manual approval, GitOps image update, Argo CD sync, EKS workload health, rollout promotion, rollback, Prometheus analysis, logs, and cleanup verification.
-3. Replace placeholder runtime identifiers with non-sensitive names after the owner confirms them.
-4. Align this topology view with the final evidence and cleanup project before cleanup starts.
-5. Mark this project complete after the evidence chain and cleanup boundary are recorded.
+1. Add the topology tool files to the implementation repository.
+2. Define the read-only Kubernetes Role and RoleBinding for the selected namespace.
+3. Create `topology/apps.yaml` with the `prediction-api` namespace and selector.
+4. Implement config loading and validation.
+5. Implement Kubernetes discovery for workloads, ReplicaSets, Pods, Services, Ingresses, ConfigMaps, Secrets, PVCs, HPAs, and Events.
+6. Implement Mermaid graph generation.
+7. Implement Markdown detail tables.
+8. Generate `topology/reports/prediction-api.md`.
+9. Add the generated report to demo evidence if it is useful.
 
 ## Files
 
 | File | What you'd learn there |
 |---|---|
-| [Progress.md](./Progress.md) | Topology view work completed and remaining |
-| [checklist.md](./checklist.md) | Components, links, evidence, and cleanup boundaries to verify |
+| [Progress.md](./Progress.md) | What topology work is done and what remains |
+| [checklist.md](./checklist.md) | Discovery scope, config fields, output, and RBAC decisions |
+| [plan.md](./plan.md) | Ordered implementation steps for the first topology report |

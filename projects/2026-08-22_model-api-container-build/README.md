@@ -42,5 +42,6 @@ The model uses the built-in scikit-learn Iris dataset and Logistic Regression. T
 
 | File | What you'd learn there |
 |---|---|
+| [app-functionality.md](./app-functionality.md) | What the prediction app does, how the model is trained, and how inference works |
 | [Progress.md](./Progress.md) | Application build work completed and remaining |
 | [checklist.md](./checklist.md) | Model, API, tests, quality checks, and Docker decisions |

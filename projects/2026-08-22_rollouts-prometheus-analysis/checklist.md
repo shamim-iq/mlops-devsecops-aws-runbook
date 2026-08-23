@@ -4,40 +4,40 @@
 
 | Item | Value |
 |---|---|
-| Argo Rollouts install method | |
-| Argo Rollouts namespace | |
-| Prometheus install method | |
-| Prometheus namespace | |
-| Prometheus service URL | |
+| Argo Rollouts install method | Helm chart `argo/argo-rollouts` |
+| Argo Rollouts namespace | `argo-rollouts` |
+| Prometheus install method | Helm chart `prometheus-community/prometheus` |
+| Prometheus namespace | `monitoring` |
+| Prometheus service URL | `http://prometheus-server.monitoring.svc.cluster.local` |
 
 ## Application Metrics
 
 | Metric | Name | Status |
 |---|---|---|
-| Request count | | Not defined |
-| Success count or rate | | Not defined |
-| Failure count or rate | | Not defined |
-| Latency | | Not defined |
-| Metrics endpoint | `GET /metrics` | Not implemented |
+| Request count | `prediction_api_requests_total` | Implemented locally |
+| Success count or rate | `prediction_api_requests_total{status="200"}` | Exposed, not gated in final demo |
+| Failure count or rate | Non-`200` slice of `prediction_api_requests_total` | Available from labels |
+| Latency | `prediction_api_prediction_seconds` | Exposed, not gated |
+| Metrics endpoint | `GET /metrics` | Implemented locally |
 
 ## Canary Rollout
 
 | Field | Value |
 |---|---|
-| Rollout name | |
-| Stable service | |
-| Canary service | |
-| Canary steps | |
-| Promotion condition | |
-| Rollback condition | |
+| Rollout name | `prediction-api` |
+| Stable service | `prediction-api` |
+| Canary service | Not separate in the first chart |
+| Canary steps | Basic canary `20%`, pause `60s`, run analysis, then `100%` |
+| Promotion condition | Prometheus request counter is greater than `0` |
+| Rollback condition | Analysis reaches failure limit |
 
 ## Prometheus Analysis
 
 | Query | Purpose | Status |
 |---|---|---|
-| Request volume query | Ensure enough traffic for analysis | Not defined |
-| Success rate query | Promote healthy release | Not defined |
-| Failure rate query | Detect bad release | Not defined |
-| Latency query | Detect slow release | Not defined |
+| Request volume query | Ensure Prometheus sees app request metrics | Implemented in final gate |
+| Success rate query | Promote healthy release | Replaced by request-volume gate for demo stability |
+| Failure rate query | Detect bad release | Failed analysis abort verified |
+| Latency query | Detect slow release | Metric exists, not implemented in first gate |
 
 Codex must not install cluster add-ons or apply rollout resources to EKS.

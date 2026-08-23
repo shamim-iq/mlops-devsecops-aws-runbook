@@ -1,0 +1,33 @@
+# Minimal demo Fluent Bit collector values.
+# Collect only prediction-api namespace logs and send them to Elasticsearch.
+
+resources:
+  requests:
+    cpu: 25m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
+
+storage:
+  enabled: false
+
+service:
+  enabled: false
+
+serviceMonitor:
+  enabled: false
+
+config:
+  service:
+    log_level: info
+  pipeline:
+    outputs:
+      - name: es
+        alias: prediction-api-elasticsearch
+        match: kube.prediction-api.*
+        host: elasticsearch
+        port: 9200
+        index: prediction-api-logs
+        suppress_type_name: true
+        replace_dots: true
