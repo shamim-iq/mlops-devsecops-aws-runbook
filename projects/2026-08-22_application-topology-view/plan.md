@@ -8,14 +8,14 @@ Project owner - Kubernetes cluster and repositories kept private.
 
 ## Status
 
-`active` - 2026-08-23. The plan is ready for implementation in the implementation repository. No Kubernetes access, generated report, or code exists yet.
+`active` - 2026-08-23. The implementation repository branch `application-topology-view-tool` contains the first tool code and local verification has passed. No live Kubernetes report has been generated yet.
 
 ## Implementation Steps
 
 1. Create `topology/apps.yaml` with `name`, `namespace`, and `selector` for `prediction-api`.
-2. Add Python dependencies for Kubernetes API access and YAML parsing.
+2. Add Python dependency for YAML parsing.
 3. Create `topology/topology_view/config.py` to load and validate the app config.
-4. Create `topology/topology_view/discover.py` to read Rollouts, Deployments, ReplicaSets, Pods, Services, Ingresses, ConfigMaps, Secrets, PersistentVolumeClaims, HorizontalPodAutoscalers, and Events.
+4. Create `topology/topology_view/discover.py` to read Rollouts, Deployments, ReplicaSets, Pods, Services, Ingresses, ConfigMaps, Secrets, PersistentVolumeClaims, HorizontalPodAutoscalers, and Events through `kubectl get ... -o json`.
 5. Match workloads and Pods with selectors, owner references, and labels.
 6. Match Services to Pods through Service selectors.
 7. Match Ingresses to Services through backend references.

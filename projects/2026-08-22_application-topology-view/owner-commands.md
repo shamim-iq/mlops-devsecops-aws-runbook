@@ -32,7 +32,6 @@ apps:
 Add runtime dependencies to the implementation repository dependency file:
 
 ```text
-kubernetes
 PyYAML
 ```
 
@@ -114,7 +113,7 @@ python -m topology.topology_view.cli --config topology\apps.yaml --app predictio
 Before adding the report to evidence, scan it:
 
 ```powershell
-rg -n "[C]:\\|[0-9]{12}|A[K]IA|A[S]IA|arn:aws" topology\reports\prediction-api.md
+rg -n "[C]:\\|[0-9]{12}|A[K]IA|A[S]IA|a[r]n:aws" topology\reports\prediction-api.md
 ```
 
 The scan should return no output. Also review the report for secret values, private keys, passwords, tokens, personal identifiers, and local paths before using it as public evidence.

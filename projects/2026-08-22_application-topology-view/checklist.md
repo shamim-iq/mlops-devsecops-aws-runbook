@@ -5,6 +5,7 @@
 | Field | Value |
 |---|---|
 | Implementation language | Python |
+| Discovery command surface | `kubectl get ... -o json` |
 | Config style | One small YAML file |
 | Required app fields | `name`, `namespace`, `selector` |
 | First app | `prediction-api` |
@@ -45,7 +46,7 @@ Generate one Markdown file per application. Each report should include one Merma
 | Output path | `topology/reports/prediction-api.md` |
 | Graph format | Mermaid `flowchart LR` |
 | Detail format | Markdown tables |
-| Generated from | Read-only Kubernetes API discovery |
+| Generated from | Read-only `kubectl` JSON discovery |
 
 ## Read-Only Access
 
