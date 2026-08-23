@@ -15,6 +15,7 @@
 - [x] Pick Python as the implementation language.
 - [x] Record the first implementation file layout.
 - [x] Record read-only RBAC requirements.
+- [x] Record owner commands for implementation setup, RBAC review, verification, report generation, and public-safety scan.
 
 ## Remaining
 
