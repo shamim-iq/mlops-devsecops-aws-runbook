@@ -8,7 +8,7 @@ Project owner - Kubernetes cluster and repositories kept private.
 
 ## Status
 
-`active` - 2026-08-23. Scope is defined, Python is selected for the first implementation, and Markdown with Mermaid is selected as the first output format. The implementation repository branch `application-topology-view-tool` contains the first topology tool, tests, CI lint inclusion, and read-only RBAC manifest. The owner still needs to review, commit, push, open the implementation pull request, run the owner-only Kubernetes verification, and generate the live report.
+`complete` - 2026-08-23. The implementation repository contains the first `kubectl`-based topology tool, tests, CI lint inclusion, read-only RBAC manifest, and generated live topology report at `topology/reports/prediction-api.md`. The owner verified read-only Kubernetes access for the `prediction-api` namespace, generated the report from live cluster state, scanned it for sensitive values, and merged the report into implementation `main`.
 
 ## How It Works
 
@@ -64,16 +64,13 @@ topology/
      `-- prediction-api.md
 ```
 
-Discovery should run with read-only Kubernetes credentials. The first report can be generated manually by the owner after the demo cluster exists, then stored as evidence if it explains the deployment better than the Argo CD resource tree alone.
+Discovery runs with read-only Kubernetes credentials. The first generated report captures the live `prediction-api` Rollout, ReplicaSets, Pod, Service, ConfigMap, selector, and recent rollout events without exposing account identifiers or secrets.
 
 ## Next
 
-1. Owner reviews, stages, commits, and pushes the implementation branch `application-topology-view-tool`.
-2. Owner opens the implementation repository pull request.
-3. Owner applies or verifies read-only Kubernetes access for `prediction-api`.
-4. Owner generates `topology/reports/prediction-api.md` from live cluster state.
-5. Owner scans the generated report for sensitive values.
-6. Add the generated report to demo evidence if it is useful.
+1. Use `topology/reports/prediction-api.md` as demo evidence if the topology view helps explain the live deployment.
+2. Regenerate the report after any meaningful Kubernetes topology change.
+3. Keep the report out of public evidence if future output includes sensitive object names, account identifiers, local paths, or secret values.
 
 ## Files
 

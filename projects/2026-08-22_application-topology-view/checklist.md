@@ -47,6 +47,8 @@ Generate one Markdown file per application. Each report should include one Merma
 | Graph format | Mermaid `flowchart LR` |
 | Detail format | Markdown tables |
 | Generated from | Read-only `kubectl` JSON discovery |
+| Generation status | Generated and merged |
+| Sensitive scan | Passed with no matches |
 
 ## Read-Only Access
 
@@ -60,3 +62,15 @@ Generate one Markdown file per application. Each report should include one Merma
 | Autoscaling resources | HPAs |
 | Argo Rollouts resources | Rollouts |
 | Cluster-scoped resources | Avoid unless PersistentVolumes are needed |
+
+## Live Report Contents
+
+| Resource group | Captured |
+|---|---|
+| Rollout | Yes |
+| ReplicaSets | Yes |
+| Pod | Yes |
+| Service | Yes |
+| ConfigMap | Yes |
+| Selector | Yes |
+| Recent rollout Events | Yes |

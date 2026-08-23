@@ -2,7 +2,7 @@
 
 ## Current State
 
-`active` - 2026-08-23. The topology requirement is captured as a separate project, Python is selected for the first implementation, and Markdown with Mermaid is selected as the first output format. The implementation repository branch `application-topology-view-tool` contains the first `kubectl`-based topology tool, tests, CI lint inclusion, and read-only RBAC manifest. Live Kubernetes verification and report generation remain owner-run.
+`complete` - 2026-08-23. The topology requirement is implemented in the implementation repository and the generated live report is merged at `topology/reports/prediction-api.md`. The owner verified Kubernetes read access for `prediction-api`, generated the report from live cluster state, scanned it for sensitive values, and merged the evidence report.
 
 ## Done
 
@@ -24,13 +24,16 @@
 - [x] Run implementation tests: 8 passed on 2026-08-23.
 - [x] Run implementation linting: passed on 2026-08-23.
 - [x] Run implementation dependency audit: no known vulnerabilities found on 2026-08-23.
+- [x] Merge implementation branch `application-topology-view-tool`.
+- [x] Verify read-only Kubernetes access for Pods and Secrets in namespace `prediction-api`.
+- [x] Verify live Rollout, ReplicaSets, Pod, Service, ConfigMap, and Events are readable.
+- [x] Fix `kubectl` JSON Pod parsing bug and add regression test.
+- [x] Run implementation tests after fix: 9 passed on 2026-08-23.
+- [x] Generate `topology/reports/prediction-api.md` from live cluster state.
+- [x] Scan generated report for sensitive values: no matches on 2026-08-23.
+- [x] Merge generated topology report into implementation `main`.
 
 ## Remaining
 
-- [ ] Owner reviews implementation branch changes.
-- [ ] Owner stages, commits, and pushes implementation branch `application-topology-view-tool`.
-- [ ] Owner opens implementation repository pull request.
-- [ ] Owner applies or verifies read-only RBAC.
-- [ ] Generate `topology/reports/prediction-api.md`.
-- [ ] Scan generated topology report for sensitive values.
-- [ ] Add evidence to the portfolio/demo if the output is useful.
+- [ ] Regenerate the report after meaningful topology changes.
+- [ ] Use the generated report as demo evidence if it improves the final evidence package.
