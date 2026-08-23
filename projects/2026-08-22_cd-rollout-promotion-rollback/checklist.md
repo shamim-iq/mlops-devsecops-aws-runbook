@@ -4,38 +4,39 @@
 
 | Field | Value |
 |---|---|
-| CD tool | |
-| Manual approval mechanism | |
-| GitOps repository URL | |
-| GitOps branch | |
-| Image tag file path | |
-| Image tag update method | |
-| Argo CD application name | |
-| Argo CD sync target | |
+| CD tool | GitHub Actions |
+| Manual approval mechanism | GitHub Actions production environment approval |
+| GitOps repository URL | `<implementation-repository-url>` |
+| GitOps branch | `main` |
+| Image tag file path | `k8s/apps/prediction-api/chart/values-prod.yaml` |
+| Image tag update method | Update `image.tag` after approval, then commit the GitOps values change |
+| Argo CD application name | `prediction-api-prod` |
+| Argo CD sync target | `k8s/apps/prediction-api/chart` rendered with `values-prod.yaml` |
 
 ## Release Proof
 
 | Item | Value |
 |---|---|
-| Healthy release image tag | |
-| Bad release image tag | |
-| Rollout name | |
-| Stable service | |
-| Canary service | |
-| Promotion threshold | |
-| Rollback threshold | |
+| Healthy release image tag | `demo-20260823-005` |
+| Bad release image tag | `bad-20260823-001` |
+| Rollout name | `prediction-api` |
+| Stable service | `prediction-api` |
+| Canary service | Not configured; canary used ReplicaSet weight without a separate canary service |
+| Promotion threshold | Request volume `> 0` |
+| Rollback threshold | Forced proof threshold `> 999999` with `failureLimit: 1` |
 
 ## Evidence
 
 | Evidence | Status |
 |---|---|
 | Manual approval record | Not captured |
-| GitOps image tag change | Not captured |
-| Argo CD sync status | Not captured |
-| Healthy rollout promotion | Not captured |
-| Prometheus healthy analysis | Not captured |
-| Bad rollout failure | Not captured |
-| Prometheus failed analysis | Not captured |
-| Argo Rollouts rollback | Not captured |
+| GitOps image tag change | Captured in GitOps commits |
+| Argo CD sync status | Captured |
+| Healthy rollout promotion | Captured |
+| Prometheus healthy analysis | Captured |
+| Bad rollout failure | Captured |
+| Prometheus failed analysis | Captured |
+| Argo Rollouts rollback | Captured |
+| Final restore to healthy state | Captured |
 
 Codex must not update GitOps manifests, trigger deployment, run cluster commands, or create Git commits.
