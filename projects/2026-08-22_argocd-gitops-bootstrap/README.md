@@ -8,7 +8,7 @@ Project owner - AWS account kept private, preferred region `us-east-1`.
 
 ## Status
 
-`active` - 2026-08-22. The Argo CD bootstrap scope is recorded. EKS cluster name, GitOps repository URL, Argo CD install method, namespace, and application source path are not yet recorded.
+`complete` - 2026-08-23. Argo CD is installed in the `argocd` namespace and reconciles the production `prediction-api` application from the implementation repository `main` branch at `k8s/apps/prediction-api/chart` with `values-prod.yaml`. Repository access is public read, so no Argo CD repository credential secret is needed. The owner verified the Argo Rollouts CRDs exist, synced `prediction-api-prod` to revision `3e8c83f`, and confirmed the Application is `Synced` and `Healthy`.
 
 ## Operating Boundary
 
@@ -27,19 +27,14 @@ EKS cluster
 
 Argo CD must read from the GitOps repository as the source of truth. It should not deploy application changes outside the manual approval and GitOps update flow.
 
-> [CONFIRM] EKS cluster name, GitOps repository URL, Argo CD namespace, install method, repository access method, and Argo CD application path are not recorded yet.
+The bootstrap uses Helm because the implementation repository already records platform Helm install notes and Helm is used for the Kubernetes desired-state package. The Argo CD Application should target the in-cluster Kubernetes API and deploy the prediction API chart into the `prediction-api` namespace.
+
+> [CONFIRM] The concrete EKS cluster name is not recorded in public docs.
 
 ## Next
 
-1. Record the EKS cluster name after Terraform creates it.
-2. Record the GitOps repository URL and branch.
-3. Choose Argo CD install method: manifest, Helm, or Terraform-managed Helm release.
-4. Record the Argo CD namespace.
-5. Decide how Argo CD authenticates to the GitOps repository.
-6. Define the Argo CD Application source path.
-7. Owner installs Argo CD in EKS.
-8. Owner connects Argo CD to the GitOps repository.
-9. Owner verifies Argo CD can sync the desired state.
+1. Record non-sensitive Argo CD sync evidence in the evidence and cleanup project.
+2. Continue with rollout, Prometheus analysis, and CD promotion or rollback proof.
 
 ## Files
 
@@ -47,3 +42,5 @@ Argo CD must read from the GitOps repository as the source of truth. It should n
 |---|---|
 | [Progress.md](./Progress.md) | Argo CD bootstrap work completed and remaining |
 | [checklist.md](./checklist.md) | Cluster, repository, install, and sync decisions |
+| [plan.md](./plan.md) | Owner-run bootstrap sequence and Argo CD Application shape |
+| [owner-commands.md](./owner-commands.md) | Exact owner-run PowerShell commands for bootstrap |
